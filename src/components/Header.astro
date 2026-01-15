@@ -126,7 +126,7 @@
   </div>
 </header>
 
-<script>
+<script is:inline>
   function initHeader() {
     const header = document.getElementById('header');
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -150,17 +150,24 @@
       lastScroll = currentScroll;
     });
 
-    // Mobile menu toggle
+    // Mobile menu toggle - open
     if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Mobile menu button clicked');
         mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
         mobileMenu.classList.add('pointer-events-auto', 'opacity-100');
         document.body.style.overflow = 'hidden';
       });
     }
 
+    // Mobile menu close button
     if (mobileMenuClose && mobileMenu) {
-      mobileMenuClose.addEventListener('click', () => {
+      mobileMenuClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Close button clicked');
         mobileMenu.classList.add('pointer-events-none', 'opacity-0');
         mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
         document.body.style.overflow = '';
@@ -171,15 +178,25 @@
     mobileMenuLinks.forEach(link => {
       link.addEventListener('click', () => {
         if (mobileMenu) {
-          mobileMenu.classList.add('pointer-events-none', 'opacity-0');
-          mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
-          document.body.style.overflow = '';
+          console.log('Menu link clicked, closing menu');
+          setTimeout(() => {
+            mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+            mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+            document.body.style.overflow = '';
+          }, 100);
         }
       });
     });
   }
 
-  // Initialize on page load
+  // Initialize immediately
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeader);
+  } else {
+    initHeader();
+  }
+
+  // Also initialize on Astro page load for SPA navigation
   document.addEventListener('astro:page-load', initHeader);
 </script>
 
