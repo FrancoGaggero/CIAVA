@@ -1,0 +1,38 @@
+---
+/**
+ * Intro Component
+ * Descripción del estudio
+ */
+---
+
+<section id="intro" class="bg-white py-32 px-6 md:py-40">
+  <div class="container mx-auto max-w-5xl">
+    <div class="intro-content text-center">
+      <div class="mx-auto max-w-4xl border border-black/5 bg-gray-50/30 px-12 py-16 md:px-16 md:py-20">
+        <div class="mb-8 inline-block">
+          <div class="h-px w-12 bg-black/20 mx-auto mb-8"></div>
+          <h2 class="mb-8 text-2xl font-light tracking-[0.2em] text-black md:text-3xl">
+            CIAVA STUDIO
+          </h2>
+          <div class="h-px w-12 bg-black/20 mx-auto"></div>
+        </div>
+        <div class="space-y-8 text-lg leading-relaxed text-black/80 md:text-xl font-light max-w-3xl mx-auto">
+          <p class="tracking-wide">
+            Somos un estudio creativo especializado en producción de contenido visual para marcas.
+          </p>
+          <p class="tracking-wide">
+            Creamos imágenes y videos que comunican identidad, elevan el producto y potencian la presencia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { fadeInUp } from '../scripts/animations.js';
+
+  document.addEventListener('astro:page-load', () => {
+    fadeInUp('.intro-content', 200);
+  });
+</script>

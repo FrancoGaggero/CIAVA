@@ -1,0 +1,120 @@
+---
+/**
+ * Portfolio Component
+ * Grid de imágenes estilo editorial con modal
+ */
+
+const portfolioImages = [
+  { id: 1, url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800', alt: 'Fashion Editorial 1' },
+  { id: 2, url: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=800', alt: 'Fashion Editorial 2' },
+  { id: 3, url: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800', alt: 'Fashion Editorial 3' },
+  { id: 4, url: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800', alt: 'Fashion Editorial 4' },
+  { id: 5, url: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800', alt: 'Fashion Editorial 5' },
+  { id: 6, url: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800', alt: 'Fashion Editorial 6' },
+  { id: 7, url: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800', alt: 'Fashion Editorial 7' },
+  { id: 8, url: 'https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?q=80&w=800', alt: 'Fashion Editorial 8' },
+  { id: 9, url: 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=800', alt: 'Fashion Editorial 9' },
+];
+---
+
+<section id="portfolio" class="bg-gray-50 py-24 px-6 md:py-32">
+  <div class="container mx-auto max-w-7xl">
+    <!-- Título -->
+    <div class="mb-16 text-center">
+      <h2 class="portfolio-title mb-4 font-display text-4xl font-bold text-black md:text-5xl">
+        Portfolio
+      </h2>
+      <div class="mx-auto h-0.5 w-24 bg-gold"></div>
+    </div>
+
+    <!-- Grid de imágenes -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {portfolioImages.map((image) => (
+        <div 
+          class="portfolio-item group relative aspect-[3/4] cursor-pointer overflow-hidden bg-gray-200"
+          data-image-url={image.url}
+        >
+          <img 
+            src={image.url} 
+            alt={image.alt}
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/20"></div>
+          
+          <!-- Overlay con icono -->
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <svg class="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Modal para imagen en grande -->
+  <div 
+    id="portfolio-modal" 
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
+  >
+    <button 
+      id="close-modal" 
+      class="absolute top-6 right-6 text-white hover:text-gold transition-colors"
+      aria-label="Cerrar modal"
+    >
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    
+    <img 
+      id="modal-image" 
+      src="" 
+      alt="Portfolio Image" 
+      class="max-h-[90vh] max-w-[90vw] object-contain"
+    />
+  </div>
+</section>
+
+<script>
+  import { setupScrollAnimation, staggerGrid } from '../scripts/animations.js';
+
+  document.addEventListener('astro:page-load', () => {
+    // Animar grid al entrar en viewport
+    setupScrollAnimation('.portfolio-item', () => {
+      staggerGrid('.portfolio-item', 80);
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('portfolio-modal');
+    const modalImage = document.getElementById('modal-image');
+    const closeModal = document.getElementById('close-modal');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    portfolioItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const imageUrl = item.getAttribute('data-image-url');
+        if (modalImage && modal && imageUrl) {
+          modalImage.setAttribute('src', imageUrl);
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    closeModal?.addEventListener('click', () => {
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+      document.body.style.overflow = 'auto';
+    });
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+</script>

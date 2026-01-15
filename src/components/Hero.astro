@@ -1,0 +1,52 @@
+---
+/**
+ * Hero Component
+ * Imagen apaisada con título CIAVA STUDIO
+ */
+---
+
+<section id="hero" class="relative h-screen w-full overflow-hidden bg-black">
+  <!-- Imagen apaisada con overlay sutil -->
+  <div class="relative h-full w-full">
+    <img 
+      src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2400" 
+      alt="CIAVA Studio" 
+      class="h-full w-full object-cover opacity-75"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+  </div>
+
+  <!-- Título superpuesto centrado -->
+  <div class="absolute inset-0 z-10 flex flex-col items-center justify-center px-6">
+    <h1 
+      class="hero-title mb-6 text-5xl font-extralight tracking-[0.35em] text-white md:text-7xl lg:text-8xl xl:text-9xl"
+    >
+      CIAVA STUDIO
+    </h1>
+    <div class="mb-6 h-px w-16 bg-white/40"></div>
+    <p 
+      class="hero-subtitle max-w-3xl text-center text-xs font-light tracking-[0.25em] text-white/90 md:text-sm"
+    >
+      FOTOGRAFÍA Y VIDEO DE MODA PARA MARCAS
+    </p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+    <div class="flex flex-col items-center gap-2">
+      <span class="text-xs font-light tracking-wider text-white/60">SCROLL</span>
+      <svg class="h-5 w-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { fadeInUp } from '../scripts/animations.js';
+
+  document.addEventListener('astro:page-load', () => {
+    fadeInUp('.hero-title', 200);
+    fadeInUp('.hero-subtitle', 400);
+  });
+</script>

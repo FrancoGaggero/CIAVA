@@ -1,0 +1,52 @@
+---
+/**
+ * Studio Nordelta Component
+ * Coming Soon - Marzo 2026
+ */
+---
+
+<section id="studio" class="bg-black py-40 px-6 md:py-48">
+  <div class="container mx-auto max-w-4xl text-center">
+    <a 
+      href="/estudio" 
+      class="block border border-white/10 bg-white/5 px-12 py-16 transition-all duration-500 hover:border-white/20 hover:bg-white/10 md:px-16 md:py-20"
+    >
+      <!-- Badge -->
+      <div class="studio-badge mb-8">
+        <span class="inline-block border border-white/20 px-6 py-3 text-xs font-light tracking-[0.3em] text-white/80">
+          COMING SOON
+        </span>
+      </div>
+
+      <!-- Fecha -->
+      <h2 class="studio-title mb-6 text-4xl font-extralight tracking-[0.25em] text-white md:text-5xl lg:text-6xl">
+        MARZO 2026
+      </h2>
+
+      <div class="mb-8 h-px w-16 bg-white/20 mx-auto"></div>
+
+      <!-- Descripción -->
+      <p class="studio-description mb-6 text-base leading-relaxed text-white/70 font-light tracking-wide md:text-lg">
+        Próximamente inauguramos nuestro estudio en Nordelta.
+      </p>
+
+      <!-- CTA -->
+      <div class="inline-flex items-center gap-2 text-xs tracking-[0.2em] text-white/50 transition-all duration-300 group-hover:text-white/80">
+        <span>MÁS INFORMACIÓN</span>
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  </div>
+</section>
+
+<script>
+  import { fadeInUp } from '../scripts/animations.js';
+
+  document.addEventListener('astro:page-load', () => {
+    fadeInUp('.studio-badge', 0);
+    fadeInUp('.studio-title', 200);
+    fadeInUp('.studio-description', 400);
+  });
+</script>

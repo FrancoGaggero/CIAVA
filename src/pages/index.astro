@@ -1,0 +1,27 @@
+---
+/**
+ * Página principal - CIAVA Landing
+ * Importa y ordena todos los componentes de la landing
+ */
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Intro from '../components/Intro.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import StudioNordelta from '../components/StudioNordelta.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+	title="CIAVA Studio - Fotografía y Video de Moda para Marcas"
+	description="Estudio creativo especializado en producción de contenido visual para marcas. Creamos imágenes y videos que comunican identidad, elevan el producto y potencian la presencia."
+>
+	<Hero />
+	<Intro />
+	<About />
+	<Services />
+	<StudioNordelta />
+	<Contact />
+	<Footer />
+</Layout>

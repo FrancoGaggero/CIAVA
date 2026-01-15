@@ -1,0 +1,86 @@
+---
+/**
+ * Services Component
+ * Servicios de CIAVA Studio
+ */
+
+const services = [
+  {
+    id: 1,
+    title: 'Producciones de fotos y video para marcas',
+    description: 'Contenido visual profesional para redes sociales, e-commerce y campañas.',
+  },
+  {
+    id: 2,
+    title: 'Asesoría de imagen y estilismo',
+    description: 'Curaduría estética para marcas que buscan definir o reforzar su estética, y para personas que quieren mejorar su imagen.',
+  },
+  {
+    id: 3,
+    title: 'Polas para modelos',
+    description: 'Polaroids profesionales, naturales y actuales para presentación a agencias.',
+  },
+  {
+    id: 4,
+    title: 'Fotografía de producto',
+    description: 'Imágenes limpias y estéticas pensadas para destacar el producto.',
+  }
+];
+---
+
+<section id="services" class="bg-white py-32 px-6 md:py-40">
+  <div class="container mx-auto max-w-5xl">
+    <!-- Título -->
+    <div class="mb-20 text-center">
+      <div class="mb-8 inline-block">
+        <div class="h-px w-12 bg-black/20 mx-auto mb-8"></div>
+        <h2 class="services-title text-2xl font-light tracking-[0.2em] text-black md:text-3xl">
+          SERVICIOS
+        </h2>
+        <div class="h-px w-12 bg-black/20 mx-auto mt-8"></div>
+      </div>
+    </div>
+
+    <!-- Lista de servicios -->
+    <div class="space-y-6">
+      {services.map((service, index) => (
+        <div class="service-card group border border-black/5 bg-gray-50/20 p-8 transition-all duration-300 hover:border-black/10 hover:bg-gray-50/40 md:p-10">
+          <div class="flex items-start gap-6">
+            <span class="text-xs font-light tracking-widest text-black/30 pt-1">
+              0{index + 1}
+            </span>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-base font-normal tracking-wide text-black md:text-lg">
+                {service.title}
+              </h3>
+              <p class="text-sm leading-loose text-black/60 font-light max-w-2xl">
+                {service.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { setupScrollAnimation, staggerReveal } from '../scripts/animations.js';
+
+  document.addEventListener('astro:page-load', () => {
+    setupScrollAnimation('.services-title', (el: Element) => {
+      const htmlEl = el as HTMLElement;
+      htmlEl.style.opacity = '0';
+      htmlEl.style.transform = 'translateY(30px)';
+      setTimeout(() => {
+        htmlEl.style.transition = 'all 0.8s ease-out';
+        htmlEl.style.opacity = '1';
+        htmlEl.style.transform = 'translateY(0)';
+      }, 100);
+    });
+
+    setupScrollAnimation('.service-card', () => {
+      staggerReveal('.service-card', 150);
+    });
+  });
+</script>

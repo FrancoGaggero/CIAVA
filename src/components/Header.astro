@@ -1,0 +1,214 @@
+---
+/**
+ * Header Component
+ * Navegación principal con animaciones elegantes
+ */
+---
+
+<header id="header" class="fixed top-0 z-50 w-full transition-all duration-500">
+  <div class="container mx-auto max-w-7xl px-6 py-6 md:py-8">
+    <nav class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="group relative">
+        <h1 class="text-xl font-light tracking-[0.3em] text-white transition-all duration-300 md:text-2xl group-hover:tracking-[0.35em]">
+          CIAVA STUDIO
+        </h1>
+        <div class="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-500 group-hover:w-full"></div>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-12">
+        <a 
+          href="/#intro" 
+          class="menu-link group relative text-sm font-light tracking-wider text-white/80 transition-all duration-300 hover:text-white"
+        >
+          <span class="relative">
+            ESTUDIO
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-500 group-hover:w-full"></span>
+          </span>
+        </a>
+        <a 
+          href="/#about" 
+          class="menu-link group relative text-sm font-light tracking-wider text-white/80 transition-all duration-300 hover:text-white"
+        >
+          <span class="relative">
+            NOSOTROS
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-500 group-hover:w-full"></span>
+          </span>
+        </a>
+        <a 
+          href="/#services" 
+          class="menu-link group relative text-sm font-light tracking-wider text-white/80 transition-all duration-300 hover:text-white"
+        >
+          <span class="relative">
+            SERVICIOS
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-500 group-hover:w-full"></span>
+          </span>
+        </a>
+        <a 
+          href="/estudio" 
+          class="menu-link group relative text-sm font-light tracking-wider text-white/80 transition-all duration-300 hover:text-white"
+        >
+          <span class="relative">
+            NORDELTA
+            <span class="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-500 group-hover:w-full"></span>
+          </span>
+        </a>
+        <a 
+          href="/#contact" 
+          class="group relative overflow-hidden border border-white/30 px-6 py-2.5 text-sm font-light tracking-wider text-white/90 transition-all duration-300 hover:border-white hover:bg-white hover:text-black"
+        >
+          CONTACTO
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        id="mobile-menu-btn"
+        class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+        aria-label="Toggle menu"
+      >
+        <span class="h-px w-6 bg-white transition-all duration-300 group-hover:w-8"></span>
+        <span class="h-px w-6 bg-white transition-all duration-300 group-hover:w-8"></span>
+        <span class="h-px w-6 bg-white transition-all duration-300 group-hover:w-8"></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    id="mobile-menu" 
+    class="fixed inset-0 z-40 flex items-center justify-center bg-black/98 opacity-0 pointer-events-none transition-opacity duration-500 md:hidden"
+  >
+    <nav class="flex flex-col items-center gap-8 text-center">
+      <a 
+        href="/#intro" 
+        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+      >
+        ESTUDIO
+      </a>
+      <a 
+        href="/#about" 
+        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+      >
+        NOSOTROS
+      </a>
+      <a 
+        href="/#services" 
+        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+      >
+        SERVICIOS
+      </a>
+      <a 
+        href="/estudio" 
+        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+      >
+        NORDELTA
+      </a>
+      <a 
+        href="/#contact" 
+        class="mobile-menu-link mt-4 border border-white/30 px-12 py-4 text-xl font-light tracking-[0.2em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black"
+      >
+        CONTACTO
+      </a>
+    </nav>
+
+    <!-- Close Button -->
+    <button 
+      id="mobile-menu-close"
+      class="absolute top-6 right-6 flex h-10 w-10 items-center justify-center text-white"
+      aria-label="Close menu"
+    >
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    const header = document.getElementById('header');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    if (!header) return;
+
+    // Scroll effect - cambiar fondo del header
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        header.classList.add('bg-black/95', 'backdrop-blur-sm', 'border-b', 'border-white/10');
+      } else {
+        header.classList.remove('bg-black/95', 'backdrop-blur-sm', 'border-b', 'border-white/10');
+      }
+
+      lastScroll = currentScroll;
+    });
+
+    // Mobile menu toggle
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
+        mobileMenu.classList.add('pointer-events-auto', 'opacity-100');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    if (mobileMenuClose && mobileMenu) {
+      mobileMenuClose.addEventListener('click', () => {
+        mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+        mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Close mobile menu when clicking on links
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+          mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initHeader);
+</script>
+
+<style>
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Animación de aparición para el menú móvil */
+  #mobile-menu.opacity-100 nav a {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  #mobile-menu.opacity-100 nav a:nth-child(1) { animation-delay: 0.1s; }
+  #mobile-menu.opacity-100 nav a:nth-child(2) { animation-delay: 0.15s; }
+  #mobile-menu.opacity-100 nav a:nth-child(3) { animation-delay: 0.2s; }
+  #mobile-menu.opacity-100 nav a:nth-child(4) { animation-delay: 0.25s; }
+  #mobile-menu.opacity-100 nav a:nth-child(5) { animation-delay: 0.3s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

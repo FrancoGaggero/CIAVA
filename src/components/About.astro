@@ -1,0 +1,125 @@
+---
+/**
+ * About Component
+ * Quiénes somos: Florencia y Valentina
+ */
+---
+
+<section id="about" class="bg-white py-32 px-6 md:py-40">
+  <div class="container mx-auto max-w-6xl">
+    <!-- Título -->
+    <div class="mb-20 text-center">
+      <div class="mb-8 inline-block">
+        <div class="h-px w-12 bg-black/20 mx-auto mb-8"></div>
+        <h2 class="about-title text-2xl font-light tracking-[0.2em] text-black md:text-3xl">
+          QUIÉNES SOMOS
+        </h2>
+        <div class="h-px w-12 bg-black/20 mx-auto mt-8"></div>
+      </div>
+    </div>
+
+    <!-- Foto del equipo -->
+    <div class="about-team-photo mb-20">
+      <div class="mx-auto max-w-5xl overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1400" 
+          alt="Equipo CIAVA Studio" 
+          class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+        />
+      </div>
+    </div>
+
+    <!-- Texto introductorio -->
+    <div class="about-intro mb-24 text-center">
+      <div class="mx-auto max-w-4xl border border-black/5 bg-gray-50/30 px-12 py-12 md:px-16 md:py-16">
+        <div class="space-y-8 text-lg leading-relaxed text-black/80 md:text-xl font-light">
+          <p class="tracking-wide">
+            Somos una fotógrafa y una productora de moda.
+          </p>
+          <p class="tracking-wide">
+            Nos fusionamos desde miradas, recorridos y edades distintas, y ahí es donde nace Ciava Studio.
+          </p>
+          <p class="tracking-wide">
+            Esa combinación nos permite abordar cada proyecto con sensibilidad estética, experiencia y una visión actual de la moda. Trabajamos de forma complementaria para crear producciones sólidas, coherentes y alineadas con la identidad de cada marca.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perfiles individuales -->
+    <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
+      <!-- Florencia -->
+      <div class="about-card group border border-black/5 bg-gray-50/20 p-8 transition-all duration-300 hover:border-black/10 hover:bg-gray-50/40 md:p-10">
+        <div class="mb-6 space-y-6">
+          <div class="border-l-2 border-black/20 pl-6">
+            <h3 class="mb-2 text-lg font-normal tracking-[0.15em] text-black">
+              FLORENCIA ZOCCOLA
+            </h3>
+            <p class="text-xs tracking-wider text-black/40 uppercase">
+              Fotógrafa
+            </p>
+          </div>
+          <div class="space-y-4 text-sm leading-loose text-black/70 font-light">
+            <p>
+              Fotógrafa con más de 10 años de experiencia, formada en Motivarte (Buenos Aires) y especializada en fotografía de moda.
+            </p>
+            <p>
+              Trabajo de manera integral cada proyecto, desde la dirección en la toma hasta la postproducción final, cuidando la estética, los detalles y los tiempos de entrega. También realizo contenido en video, creando piezas visuales coherentes y pensadas para potenciar la identidad de cada marca en redes y plataformas digitales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Valentina -->
+      <div class="about-card group border border-black/5 bg-gray-50/20 p-8 transition-all duration-300 hover:border-black/10 hover:bg-gray-50/40 md:p-10">
+        <div class="mb-6 space-y-6">
+          <div class="border-l-2 border-black/20 pl-6">
+            <h3 class="mb-2 text-lg font-normal tracking-[0.15em] text-black">
+              VALENTINA BOZZONE
+            </h3>
+            <p class="text-xs tracking-wider text-black/40 uppercase">
+              Productora de Moda
+            </p>
+          </div>
+          <div class="space-y-4 text-sm leading-loose text-black/70 font-light">
+            <p>
+              Productora de moda recibida en la Universidad de Palermo.
+            </p>
+            <p>
+              Me encargo de la dirección creativa/styling y de la producción integral de cada proyecto. Trabajo en la conceptualización de la idea, el armado de looks, la curaduría estética y la coordinación general de la producción, asegurando que cada imagen tenga coherencia, identidad y una lectura clara de marca.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { setupScrollAnimation, staggerReveal } from '../scripts/animations.js';
+
+  document.addEventListener('astro:page-load', () => {
+    setupScrollAnimation('.about-title', (el: Element) => {
+      const htmlEl = el as HTMLElement;
+      htmlEl.style.opacity = '0';
+      htmlEl.style.transform = 'translateY(30px)';
+      setTimeout(() => {
+        htmlEl.style.transition = 'all 0.8s ease-out';
+        htmlEl.style.opacity = '1';
+        htmlEl.style.transform = 'translateY(0)';
+      }, 100);
+    });
+
+    setupScrollAnimation('.about-team-photo', () => {
+      staggerReveal('.about-team-photo', 0);
+    });
+
+    setupScrollAnimation('.about-intro', () => {
+      staggerReveal('.about-intro', 0);
+    });
+
+    setupScrollAnimation('.about-card', () => {
+      staggerReveal('.about-card', 200);
+    });
+  });
+</script>
