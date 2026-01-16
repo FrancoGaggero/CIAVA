@@ -6,30 +6,30 @@
 import heroImage from '../assets/images/hero/fondo.jpeg';
 ---
 
-<section id="hero" class="relative h-[150vh] w-full overflow-hidden bg-black">
+<section id="hero" class="relative h-screen sm:h-[120vh] md:h-[150vh] w-full overflow-hidden bg-black">
   <!-- Imagen apaisada con overlay sutil -->
   <div class="relative h-full w-full">
     <img 
       src={heroImage.src} 
       alt="CIAVA Studio" 
-      class="h-full w-full object-cover opacity-75 scale-110"
+      class="h-full w-full object-cover opacity-75 "
       style="object-position: center top;"
     />
     <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
   </div>
 
   <!-- Título superpuesto centrado -->
-  <div class="absolute inset-0 z-10 flex flex-col items-center justify-center px-6">
+  <div class="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-6">
     <h1 
       id="hero-title"
-      class="hero-title mb-6 text-5xl font-extralight tracking-[0.35em] text-white md:text-7xl lg:text-8xl xl:text-9xl"
+      class="hero-title mb-4 sm:mb-6 text-3xl sm:text-5xl font-extralight tracking-[0.25em] sm:tracking-[0.35em] text-white md:text-7xl lg:text-8xl xl:text-9xl"
     >
       CIAVA STUDIO
     </h1>
-    <div class="mb-6 h-px w-16 bg-white/40"></div>
+    <div class="mb-4 sm:mb-6 h-px w-12 sm:w-16 bg-white/40"></div>
     <p 
       id="hero-subtitle"
-      class="hero-subtitle max-w-3xl text-center text-xs font-light tracking-[0.25em] text-white/90 md:text-sm"
+      class="hero-subtitle max-w-3xl text-center text-[10px] sm:text-xs font-light tracking-[0.2em] sm:tracking-[0.25em] text-white/90 md:text-sm px-4"
     >
       FOTOGRAFÍA Y VIDEO DE MODA PARA MARCAS
     </p>

@@ -28,32 +28,32 @@ const services = [
 ];
 ---
 
-<section id="services" class="bg-white py-32 px-6 md:py-40">
+<section id="services" class="bg-white py-16 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6">
   <div class="container mx-auto max-w-5xl">
     <!-- Título -->
-    <div class="mb-20 text-center">
-      <div class="mb-8 inline-block">
-        <div class="h-px w-12 bg-black/20 mx-auto mb-8"></div>
-        <h2 class="services-title text-2xl font-light tracking-[0.2em] text-black md:text-3xl">
+    <div class="mb-12 sm:mb-16 md:mb-20 text-center">
+      <div class="mb-6 sm:mb-8 inline-block">
+        <div class="h-px w-10 sm:w-12 bg-black/20 mx-auto mb-6 sm:mb-8"></div>
+        <h2 class="services-title text-xl sm:text-2xl font-light tracking-[0.2em] text-black md:text-3xl">
           SERVICIOS
         </h2>
-        <div class="h-px w-12 bg-black/20 mx-auto mt-8"></div>
+        <div class="h-px w-10 sm:w-12 bg-black/20 mx-auto mt-6 sm:mt-8"></div>
       </div>
     </div>
 
     <!-- Lista de servicios -->
     <div class="space-y-6">
       {services.map((service, index) => (
-        <div class="service-card group border border-black/5 bg-gray-50/20 p-8 transition-all duration-300 hover:border-black/10 hover:bg-gray-50/40 md:p-10">
-          <div class="flex items-start gap-6">
+        <div class="service-card group border border-black/5 bg-gray-50/20 p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:border-black/10 hover:bg-gray-50/40">
+          <div class="flex items-start gap-4 sm:gap-6">
             <span class="text-xs font-light tracking-widest text-black/30 pt-1">
               0{index + 1}
             </span>
-            <div class="flex-1 space-y-3">
-              <h3 class="text-base font-normal tracking-wide text-black md:text-lg">
+            <div class="flex-1 space-y-2 sm:space-y-3">
+              <h3 class="text-sm sm:text-base font-normal tracking-wide text-black md:text-lg">
                 {service.title}
               </h3>
-              <p class="text-sm leading-loose text-black/60 font-light max-w-2xl">
+              <p class="text-xs sm:text-sm leading-relaxed sm:leading-loose text-black/60 font-light max-w-2xl">
                 {service.description}
               </p>
             </div>
