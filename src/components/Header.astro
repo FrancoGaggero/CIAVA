@@ -74,57 +74,62 @@
       </button>
     </nav>
   </div>
-
-  <!-- Mobile Menu Overlay -->
-  <div 
-    id="mobile-menu" 
-    class="fixed inset-0 z-40 flex items-center justify-center bg-black/98 opacity-0 pointer-events-none transition-opacity duration-500 md:hidden"
-  >
-    <nav class="flex flex-col items-center gap-8 text-center">
-      <a 
-        href="/#intro" 
-        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
-      >
-        ESTUDIO
-      </a>
-      <a 
-        href="/#about" 
-        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
-      >
-        NOSOTROS
-      </a>
-      <a 
-        href="/#services" 
-        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
-      >
-        SERVICIOS
-      </a>
-      <a 
-        href="/estudio" 
-        class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
-      >
-        NORDELTA
-      </a>
-      <a 
-        href="/#contact" 
-        class="mobile-menu-link mt-4 border border-white/30 px-12 py-4 text-xl font-light tracking-[0.2em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black"
-      >
-        CONTACTO
-      </a>
-    </nav>
-
-    <!-- Close Button -->
-    <button 
-      id="mobile-menu-close"
-      class="absolute top-6 right-6 flex h-10 w-10 items-center justify-center text-white"
-      aria-label="Close menu"
-    >
-      <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-  </div>
 </header>
+
+<!-- Mobile Menu Overlay - Fuera del header para evitar conflictos de posicionamiento -->
+<div 
+  id="mobile-menu" 
+  class="fixed inset-0 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 md:hidden"
+  style="z-index: 9999; top: 0; left: 0; right: 0; bottom: 0; position: fixed;"
+>
+  <!-- Backdrop oscuro -->
+  <div class="absolute inset-0 bg-black/95 backdrop-blur-md"></div>
+  
+  <!-- Contenido del menú -->
+  <nav class="relative z-10 flex flex-col items-center gap-8 text-center px-6">
+    <a 
+      href="/#intro" 
+      class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+    >
+      ESTUDIO
+    </a>
+    <a 
+      href="/#about" 
+      class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+    >
+      NOSOTROS
+    </a>
+    <a 
+      href="/#services" 
+      class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+    >
+      SERVICIOS
+    </a>
+    <a 
+      href="/estudio" 
+      class="mobile-menu-link text-2xl font-light tracking-[0.2em] text-white/80 transition-all duration-300 hover:text-white hover:tracking-[0.25em]"
+    >
+      NORDELTA
+    </a>
+    <a 
+      href="/#contact" 
+      class="mobile-menu-link mt-4 border border-white/30 px-12 py-4 text-xl font-light tracking-[0.2em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black"
+    >
+      CONTACTO
+    </a>
+  </nav>
+
+  <!-- Close Button -->
+  <button 
+    id="mobile-menu-close"
+    class="absolute top-6 right-6 flex h-10 w-10 items-center justify-center text-white/80 hover:text-white transition-colors duration-300 z-20"
+    aria-label="Close menu"
+  >
+    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+</div>
 
 <script is:inline>
   function initHeader() {
@@ -155,7 +160,6 @@
       mobileMenuBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Mobile menu button clicked');
         mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
         mobileMenu.classList.add('pointer-events-auto', 'opacity-100');
         document.body.style.overflow = 'hidden';
@@ -167,10 +171,21 @@
       mobileMenuClose.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Close button clicked');
         mobileMenu.classList.add('pointer-events-none', 'opacity-0');
         mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
         document.body.style.overflow = '';
+      });
+    }
+
+    // Close menu when clicking backdrop
+    if (mobileMenu) {
+      mobileMenu.addEventListener('click', (e) => {
+        // Solo cerrar si se hace clic directamente en el overlay (no en el nav)
+        if (e.target === mobileMenu || e.target.classList.contains('bg-black/95')) {
+          mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+          mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+          document.body.style.overflow = '';
+        }
       });
     }
 
@@ -178,7 +193,6 @@
     mobileMenuLinks.forEach(link => {
       link.addEventListener('click', () => {
         if (mobileMenu) {
-          console.log('Menu link clicked, closing menu');
           setTimeout(() => {
             mobileMenu.classList.add('pointer-events-none', 'opacity-0');
             mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
@@ -186,6 +200,15 @@
           }, 100);
         }
       });
+    });
+
+    // Cerrar menú con tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('opacity-100')) {
+        mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+        mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+        document.body.style.overflow = '';
+      }
     });
   }
 

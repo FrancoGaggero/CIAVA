@@ -41,7 +41,7 @@ import muestra4 from '../assets/images/studio/muestra4.jpeg';
 
         <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8">
           <!-- Imagen 1 -->
-          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50">
+          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50 opacity-0" style="transform: scale(0.8);">
             <img 
               src={muestra1.src} 
               alt="Producción 1" 
@@ -51,7 +51,7 @@ import muestra4 from '../assets/images/studio/muestra4.jpeg';
           </div>
 
           <!-- Imagen 2 -->
-          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50">
+          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50 opacity-0" style="transform: scale(0.8);">
             <img 
               src={muestra2.src} 
               alt="Producción 2" 
@@ -61,7 +61,7 @@ import muestra4 from '../assets/images/studio/muestra4.jpeg';
           </div>
 
           <!-- Imagen 3 -->
-          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50">
+          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50 opacity-0" style="transform: scale(0.8);">
             <img 
               src={muestra3.src} 
               alt="Producción 3" 
@@ -71,7 +71,7 @@ import muestra4 from '../assets/images/studio/muestra4.jpeg';
           </div>
 
           <!-- Imagen 4 -->
-          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50">
+          <div class="production-item group relative aspect-[4/5] overflow-hidden border border-black/5 bg-gray-50 opacity-0" style="transform: scale(0.8);">
             <img 
               src={muestra4.src} 
               alt="Producción 4" 
@@ -86,13 +86,57 @@ import muestra4 from '../assets/images/studio/muestra4.jpeg';
 </section>
 
 <script>
-  import { fadeInUp, staggerReveal } from '../scripts/animations.js';
+  import anime from 'animejs';
 
-  document.addEventListener('astro:page-load', () => {
-    fadeInUp('.intro-content', 200);
+  function initProductionAnimations() {
+    const productionItems = document.querySelectorAll('.production-item');
     
-    setTimeout(() => {
-      staggerReveal('.production-item', 150);
-    }, 400);
-  });
+    if (!productionItems.length) {
+      console.log('No production items found');
+      return;
+    }
+
+    // Configurar observer para animaciones en scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
+          entry.target.setAttribute('data-animated', 'true');
+          
+          // Obtener el índice del item para calcular el delay
+          const items = Array.from(productionItems);
+          const index = items.indexOf(entry.target);
+          
+          // Animar individualmente cada imagen cuando entra en vista
+          anime({
+            targets: entry.target,
+            scale: [0.8, 1],
+            opacity: [0, 1],
+            duration: 800,
+            delay: index * 150,
+            easing: 'easeOutElastic(1, .8)',
+          });
+        }
+      });
+    }, observerOptions);
+
+    // Observar cada item individualmente
+    productionItems.forEach(item => {
+      observer.observe(item);
+    });
+  }
+
+  // Ejecutar cuando la página cargue
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductionAnimations);
+  } else {
+    initProductionAnimations();
+  }
+  
+  // También ejecutar en navegación SPA
+  document.addEventListener('astro:page-load', initProductionAnimations);
 </script>
