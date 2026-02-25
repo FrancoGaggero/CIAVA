@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base styles for mobile optimization */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Prevent horizontal overflow */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Better touch targets on mobile */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Prevent zoom on input focus in iOS */
+  input, textarea, select {
+    font-size: 16px;
+  }
+
+  /* Improve image rendering */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+@layer components {
+  /* Container utilities */
+  .safe-padding {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  /* Prevent text from being too wide on mobile */
+  .readable-width {
+    max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -6,40 +6,40 @@
 import heroImage from '../assets/images/hero/fondo.jpeg';
 ---
 
-<section id="hero" class="relative h-screen sm:h-[120vh] md:h-[150vh] w-full overflow-hidden bg-black">
+<section id="hero" class="relative min-h-screen w-full overflow-hidden bg-black">
   <!-- Imagen apaisada con overlay sutil -->
-  <div class="relative h-full w-full">
+  <div class="absolute inset-0">
     <img 
       src={heroImage.src} 
       alt="CIAVA Studio" 
-      class="h-full w-full object-cover opacity-75 "
-      style="object-position: center top;"
+      class="h-full w-full object-cover opacity-75"
+      style="object-position: center center;"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
   </div>
 
   <!-- Título superpuesto centrado -->
-  <div class="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-6">
+  <div class="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-20">
     <h1 
       id="hero-title"
-      class="hero-title mb-4 sm:mb-6 text-3xl sm:text-5xl font-extralight tracking-[0.25em] sm:tracking-[0.35em] text-white md:text-7xl lg:text-8xl xl:text-9xl"
+      class="hero-title mb-4 text-center text-[clamp(1.75rem,8vw,7rem)] font-extralight tracking-[0.15em] text-white sm:mb-6 sm:tracking-[0.25em] md:tracking-[0.35em]"
     >
       CIAVA STUDIO
     </h1>
-    <div class="mb-4 sm:mb-6 h-px w-12 sm:w-16 bg-white/40"></div>
+    <div class="mb-4 h-px w-12 bg-white/40 sm:mb-6 sm:w-16"></div>
     <p 
       id="hero-subtitle"
-      class="hero-subtitle max-w-3xl text-center text-[10px] sm:text-xs font-light tracking-[0.2em] sm:tracking-[0.25em] text-white/90 md:text-sm px-4"
+      class="hero-subtitle max-w-xs text-center text-[10px] font-light tracking-[0.15em] text-white/90 sm:max-w-md sm:text-xs sm:tracking-[0.2em] md:max-w-lg md:text-sm md:tracking-[0.25em]"
     >
       FOTOGRAFÍA Y VIDEO DE MODA PARA MARCAS
     </p>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+  <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce sm:bottom-12">
     <div class="flex flex-col items-center gap-2">
-      <span class="text-xs font-light tracking-wider text-white/60">SCROLL</span>
-      <svg class="h-5 w-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <span class="text-[10px] font-light tracking-wider text-white/60 sm:text-xs">SCROLL</span>
+      <svg class="h-4 w-4 text-white/60 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
       </svg>
     </div>
