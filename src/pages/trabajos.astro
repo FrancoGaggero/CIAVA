@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+/**
+ * Página de Trabajos / Portfolio
+ * Galería organizada por categorías de producción
+ * Las fotos se agregarán más adelante
+ */
+
+const categories = [
+  {
+    id: 'calzado',
+    title: 'CALZADO',
+    description: 'Producciones fotográficas para marcas de calzado.',
+    photos: [] as string[],
+  },
+  {
+    id: 'indumentaria',
+    title: 'INDUMENTARIA',
+    description: 'Producciones de moda para marcas de indumentaria.',
+    photos: [] as string[],
+  },
+  {
+    id: 'bikinis',
+    title: 'BIKINIS',
+    description: 'Producciones para marcas de trajes de baño y bikinis.',
+    photos: [] as string[],
+  },
+  {
+    id: 'ropa-deportiva',
+    title: 'ROPA DEPORTIVA',
+    description: 'Producciones para marcas de ropa deportiva y activewear.',
+    photos: [] as string[],
+  },
+  {
+    id: 'accesorios',
+    title: 'ACCESORIOS',
+    description: 'Producciones fotográficas de accesorios y complementos.',
+    photos: [] as string[],
+  },
+];
+---
+
+<Layout title="Trabajos - CIAVA STUDIO">
+  <!-- Hero -->
+  <section class="relative bg-black py-32 sm:py-40 md:py-48 px-4 sm:px-6">
+    <div class="container mx-auto max-w-4xl text-center">
+      <div class="h-px w-12 bg-white/20 mx-auto mb-8"></div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight tracking-[0.2em] sm:tracking-[0.25em] text-white mb-6">
+        TRABAJOS
+      </h1>
+      <div class="h-px w-12 bg-white/20 mx-auto mb-8"></div>
+      <p class="text-sm sm:text-base font-light tracking-wide text-white/70 max-w-2xl mx-auto">
+        Una selección de nuestras producciones organizadas por categoría
+      </p>
+    </div>
+  </section>
+
+  <!-- Filtros de categoría -->
+  <section class="bg-white border-b border-black/5 sticky top-[72px] z-20">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto py-4 sm:py-6 scrollbar-hide">
+        <button 
+          data-filter="all" 
+          class="filter-btn active shrink-0 border border-black bg-black px-4 py-2 sm:px-6 sm:py-3 text-[10px] sm:text-xs font-light tracking-[0.2em] text-white transition-all duration-300 hover:bg-black hover:text-white"
+        >
+          TODOS
+        </button>
+        {categories.map((cat) => (
+          <button 
+            data-filter={cat.id} 
+            class="filter-btn shrink-0 border border-black/20 bg-white px-4 py-2 sm:px-6 sm:py-3 text-[10px] sm:text-xs font-light tracking-[0.2em] text-black/70 transition-all duration-300 hover:bg-black hover:text-white hover:border-black"
+          >
+            {cat.title}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías con fotos -->
+  <section class="bg-white py-16 sm:py-24 md:py-32 px-4 sm:px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="space-y-20 sm:space-y-28 md:space-y-36">
+        {categories.map((cat) => (
+          <div class="category-section" data-category={cat.id}>
+            <!-- Título de categoría -->
+            <div class="mb-10 sm:mb-14 md:mb-16">
+              <div class="flex items-center gap-4 sm:gap-6 mb-4">
+                <div class="h-px flex-1 bg-black/10"></div>
+                <h2 class="text-lg sm:text-xl md:text-2xl font-light tracking-[0.2em] text-black">
+                  {cat.title}
+                </h2>
+                <div class="h-px flex-1 bg-black/10"></div>
+              </div>
+              <p class="text-center text-xs sm:text-sm font-light text-black/50 tracking-wide">
+                {cat.description}
+              </p>
+            </div>
+
+            <!-- Grid de fotos -->
+            {cat.photos.length > 0 ? (
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+                {cat.photos.map((photo, i) => (
+                  <div class="group relative overflow-hidden bg-gray-100 aspect-[3/4] cursor-pointer">
+                    <img 
+                      src={photo} 
+                      alt={`${cat.title} - Foto ${i + 1}`}
+                      class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/20"></div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div class="border border-dashed border-black/10 bg-gray-50/30 py-16 sm:py-20 md:py-24 text-center">
+                <svg class="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-black/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <p class="text-xs sm:text-sm font-light text-black/30 tracking-wider">
+                  PRÓXIMAMENTE
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Volver -->
+  <section class="bg-white py-16 sm:py-20 px-4 sm:px-6 border-t border-black/5">
+    <div class="container mx-auto max-w-4xl text-center">
+      <a 
+        href="/" 
+        class="group inline-flex items-center gap-3 border border-black/20 bg-black px-10 py-4 sm:px-12 sm:py-5 text-xs sm:text-sm font-light tracking-[0.2em] text-white transition-all duration-500 hover:bg-white hover:text-black hover:border-black hover:scale-105 hover:shadow-xl"
+      >
+        <svg class="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        VOLVER AL INICIO
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function initFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sections = document.querySelectorAll('.category-section');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Actualizar botón activo
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.classList.remove('bg-black', 'text-white', 'border-black');
+          b.classList.add('bg-white', 'text-black/70', 'border-black/20');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('bg-white', 'text-black/70', 'border-black/20');
+        btn.classList.add('bg-black', 'text-white', 'border-black');
+
+        // Filtrar secciones
+        sections.forEach(section => {
+          const category = section.getAttribute('data-category');
+          const el = section as HTMLElement;
+          if (filter === 'all' || category === filter) {
+            el.style.display = 'block';
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            requestAnimationFrame(() => {
+              el.style.transition = 'all 0.5s ease-out';
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            });
+          } else {
+            el.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFilters);
+  } else {
+    initFilters();
+  }
+
+  document.addEventListener('astro:page-load', initFilters);
+</script>
