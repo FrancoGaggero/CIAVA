@@ -6,40 +6,50 @@
 import heroImage from '../assets/images/hero/fondo.jpeg';
 ---
 
-<section id="hero" class="relative min-h-screen w-full overflow-hidden bg-black">
-  <!-- Imagen apaisada con overlay sutil -->
+<section id="hero" class="relative min-h-screen w-full overflow-hidden bg-ciava-black">
+  <!-- Imagen con overlay cinematográfico -->
   <div class="absolute inset-0">
     <img 
       src={heroImage.src} 
       alt="CIAVA Studio" 
-      class="h-full w-full object-cover opacity-75"
+      class="h-full w-full object-cover opacity-60"
       style="object-position: center center;"
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-ciava-black/50 via-ciava-black/10 to-ciava-black/80"></div>
+    <!-- Vignette -->
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 50%, rgba(10,10,10,0.6) 100%);"></div>
   </div>
 
-  <!-- Título superpuesto centrado -->
+  <!-- Contenido centrado -->
   <div class="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-20">
+    <!-- Pequeño acento dorado -->
+    <div class="mb-6 sm:mb-8 h-8 w-px bg-gradient-to-b from-transparent via-ciava-gold/60 to-transparent"></div>
+    
     <h1 
       id="hero-title"
-      class="hero-title mb-4 text-center text-[clamp(1.75rem,8vw,7rem)] font-extralight tracking-[0.15em] text-white sm:mb-6 sm:tracking-[0.25em] md:tracking-[0.35em]"
+      class="hero-title mb-4 text-center font-serif text-[clamp(2.25rem,9vw,8rem)] font-light tracking-[0.08em] text-white sm:mb-6 sm:tracking-[0.12em] md:tracking-[0.15em] leading-[0.9]"
     >
       CIAVA STUDIO
     </h1>
-    <div class="mb-4 h-px w-12 bg-white/40 sm:mb-6 sm:w-16"></div>
+    
+    <div class="mb-5 sm:mb-6 line-accent w-16 sm:w-24"></div>
+    
     <p 
       id="hero-subtitle"
-      class="hero-subtitle max-w-xs text-center text-[10px] font-light tracking-[0.15em] text-white/90 sm:max-w-md sm:text-xs sm:tracking-[0.2em] md:max-w-lg md:text-sm md:tracking-[0.25em]"
+      class="hero-subtitle max-w-xs text-center text-[10px] font-light tracking-[0.2em] text-white/70 sm:max-w-md sm:text-xs sm:tracking-[0.25em] md:max-w-lg md:text-sm"
     >
       FOTOGRAFÍA Y VIDEO DE MODA PARA MARCAS
     </p>
+
+    <!-- Pequeño acento dorado -->
+    <div class="mt-6 sm:mt-8 h-8 w-px bg-gradient-to-b from-ciava-gold/40 via-transparent to-transparent"></div>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce sm:bottom-12">
-    <div class="flex flex-col items-center gap-2">
-      <span class="text-[10px] font-light tracking-wider text-white/60 sm:text-xs">SCROLL</span>
-      <svg class="h-4 w-4 text-white/60 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 sm:bottom-12">
+    <div class="flex flex-col items-center gap-2 animate-pulse-soft">
+      <span class="text-[9px] font-light tracking-[0.3em] text-ciava-gold/50 sm:text-[10px]">SCROLL</span>
+      <svg class="h-4 w-4 text-ciava-gold/40 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
       </svg>
     </div>

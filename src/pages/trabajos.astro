@@ -4,140 +4,215 @@ import Layout from '../layouts/Layout.astro';
 /**
  * Página de Trabajos / Portfolio
  * Galería organizada por categorías de producción
- * Las fotos se agregarán más adelante
  */
+
+// Importar imágenes por categoría
+const calzadoImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/calzado- carteras/*', { eager: true });
+const indumentariaImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/indumentaria/*', { eager: true });
+const bikinisImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/bikinis/*', { eager: true });
+const deportivaImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/ropa deportiva/*', { eager: true });
+const accesoriosImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/accesorios/*', { eager: true });
+const modelTestImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/model test/*', { eager: true });
+
+function extractSrcs(modules: Record<string, { default: ImageMetadata }>) {
+  return Object.values(modules).map(m => m.default.src);
+}
 
 const categories = [
   {
-    id: 'calzado',
-    title: 'CALZADO',
-    description: 'Producciones fotográficas para marcas de calzado.',
-    photos: [] as string[],
-  },
-  {
     id: 'indumentaria',
     title: 'INDUMENTARIA',
-    description: 'Producciones de moda para marcas de indumentaria.',
-    photos: [] as string[],
+    photos: extractSrcs(indumentariaImgs),
   },
   {
     id: 'bikinis',
     title: 'BIKINIS',
-    description: 'Producciones para marcas de trajes de baño y bikinis.',
-    photos: [] as string[],
+    photos: extractSrcs(bikinisImgs),
+  },
+  {
+    id: 'calzado-carteras',
+    title: 'CALZADO & CARTERAS',
+    photos: extractSrcs(calzadoImgs),
   },
   {
     id: 'ropa-deportiva',
     title: 'ROPA DEPORTIVA',
-    description: 'Producciones para marcas de ropa deportiva y activewear.',
-    photos: [] as string[],
+    photos: extractSrcs(deportivaImgs),
   },
   {
     id: 'accesorios',
     title: 'ACCESORIOS',
-    description: 'Producciones fotográficas de accesorios y complementos.',
-    photos: [] as string[],
+    photos: extractSrcs(accesoriosImgs),
+  },
+  {
+    id: 'model-test',
+    title: 'MODEL TEST',
+    photos: extractSrcs(modelTestImgs),
   },
 ];
+
+const totalPhotos = categories.reduce((acc, cat) => acc + cat.photos.length, 0);
 ---
 
-<Layout title="Trabajos - CIAVA STUDIO">
+<Layout title="Portfolio - CIAVA STUDIO">
   <!-- Hero -->
-  <section class="relative bg-black py-32 sm:py-40 md:py-48 px-4 sm:px-6">
-    <div class="container mx-auto max-w-4xl text-center">
-      <div class="h-px w-12 bg-white/20 mx-auto mb-8"></div>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight tracking-[0.2em] sm:tracking-[0.25em] text-white mb-6">
-        TRABAJOS
+  <section class="relative bg-black pt-32 pb-16 sm:pt-40 sm:pb-20 md:pt-48 md:pb-24 px-4 sm:px-6">
+    <div class="container mx-auto max-w-5xl text-center">
+      <div class="h-px w-10 sm:w-12 bg-white/20 mx-auto mb-6 sm:mb-8"></div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extralight tracking-[0.2em] sm:tracking-[0.25em] text-white mb-4 sm:mb-6">
+        PORTFOLIO
       </h1>
-      <div class="h-px w-12 bg-white/20 mx-auto mb-8"></div>
-      <p class="text-sm sm:text-base font-light tracking-wide text-white/70 max-w-2xl mx-auto">
-        Una selección de nuestras producciones organizadas por categoría
+      <div class="h-px w-10 sm:w-12 bg-white/20 mx-auto mb-6 sm:mb-8"></div>
+      <p class="text-xs sm:text-sm font-light tracking-wide text-white/50 max-w-xl mx-auto leading-relaxed">
+        Una selección de nuestras producciones fotográficas
       </p>
+
+      <!-- Stats -->
+      <div class="mt-10 sm:mt-14 flex items-center justify-center gap-8 sm:gap-12">
+        <div class="text-center">
+          <div class="text-2xl sm:text-3xl font-extralight text-white mb-1">{totalPhotos}</div>
+          <div class="text-[9px] sm:text-[10px] text-white/40 tracking-[0.2em]">FOTOS</div>
+        </div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center">
+          <div class="text-2xl sm:text-3xl font-extralight text-white mb-1">{categories.length}</div>
+          <div class="text-[9px] sm:text-[10px] text-white/40 tracking-[0.2em]">CATEGORÍAS</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Filtros de categoría -->
-  <section class="bg-white border-b border-black/5 sticky top-[72px] z-20">
+  <!-- Filtros sticky -->
+  <nav class="sticky top-0 z-30 bg-black/95 backdrop-blur-md border-b border-white/5">
     <div class="container mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto py-4 sm:py-6 scrollbar-hide">
+      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-3 sm:py-4 scrollbar-hide">
         <button 
           data-filter="all" 
-          class="filter-btn active shrink-0 border border-black bg-black px-4 py-2 sm:px-6 sm:py-3 text-[10px] sm:text-xs font-light tracking-[0.2em] text-white transition-all duration-300 hover:bg-black hover:text-white"
+          class="filter-btn active shrink-0 px-3 py-1.5 sm:px-5 sm:py-2 text-[9px] sm:text-[10px] font-light tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 border border-white bg-white text-black"
         >
           TODOS
         </button>
         {categories.map((cat) => (
           <button 
             data-filter={cat.id} 
-            class="filter-btn shrink-0 border border-black/20 bg-white px-4 py-2 sm:px-6 sm:py-3 text-[10px] sm:text-xs font-light tracking-[0.2em] text-black/70 transition-all duration-300 hover:bg-black hover:text-white hover:border-black"
+            class="filter-btn shrink-0 px-3 py-1.5 sm:px-5 sm:py-2 text-[9px] sm:text-[10px] font-light tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 border border-white/15 text-white/50 hover:border-white/40 hover:text-white/80"
           >
             {cat.title}
           </button>
         ))}
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- Categorías con fotos -->
-  <section class="bg-white py-16 sm:py-24 md:py-32 px-4 sm:px-6">
-    <div class="container mx-auto max-w-6xl">
-      <div class="space-y-20 sm:space-y-28 md:space-y-36">
-        {categories.map((cat) => (
-          <div class="category-section" data-category={cat.id}>
-            <!-- Título de categoría -->
-            <div class="mb-10 sm:mb-14 md:mb-16">
-              <div class="flex items-center gap-4 sm:gap-6 mb-4">
-                <div class="h-px flex-1 bg-black/10"></div>
-                <h2 class="text-lg sm:text-xl md:text-2xl font-light tracking-[0.2em] text-black">
-                  {cat.title}
-                </h2>
-                <div class="h-px flex-1 bg-black/10"></div>
-              </div>
-              <p class="text-center text-xs sm:text-sm font-light text-black/50 tracking-wide">
-                {cat.description}
-              </p>
+  <!-- Galería -->
+  <section class="bg-black min-h-screen">
+    <div class="container mx-auto max-w-7xl px-2 sm:px-4 md:px-6">
+      {categories.map((cat, catIndex) => (
+        <div 
+          class="category-section py-12 sm:py-16 md:py-20" 
+          data-category={cat.id}
+        >
+          <!-- Título categoría -->
+          <div class="mb-8 sm:mb-10 md:mb-12 px-2">
+            <div class="flex items-center gap-4 sm:gap-6">
+              <h2 class="text-xs sm:text-sm font-light tracking-[0.25em] sm:tracking-[0.3em] text-white/80">
+                {cat.title}
+              </h2>
+              <div class="h-px flex-1 bg-white/8"></div>
+              <span class="text-[10px] sm:text-xs text-white/25 tracking-wider font-light">
+                {String(cat.photos.length).padStart(2, '0')}
+              </span>
             </div>
+          </div>
 
-            <!-- Grid de fotos -->
-            {cat.photos.length > 0 ? (
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-                {cat.photos.map((photo, i) => (
-                  <div class="group relative overflow-hidden bg-gray-100 aspect-[3/4] cursor-pointer">
+          <!-- Grid de fotos -->
+          {cat.photos.length > 0 ? (
+            <div class={`grid gap-1.5 sm:gap-2 md:gap-3 ${
+              cat.photos.length === 1 
+                ? 'grid-cols-1 max-w-2xl mx-auto' 
+                : cat.photos.length <= 3 
+                  ? 'grid-cols-2 sm:grid-cols-3' 
+                  : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+            }`}>
+              {cat.photos.map((photo, i) => (
+                <div 
+                  class={`gallery-item group relative overflow-hidden cursor-pointer bg-neutral-900 ${
+                    cat.photos.length >= 6 && i === 0 
+                      ? 'col-span-2 row-span-2' 
+                      : ''
+                  }`}
+                  data-src={photo}
+                >
+                  <div class={`relative w-full ${
+                    cat.photos.length >= 6 && i === 0 
+                      ? 'aspect-square' 
+                      : 'aspect-[3/4]'
+                  }`}>
                     <img 
                       src={photo} 
-                      alt={`${cat.title} - Foto ${i + 1}`}
-                      class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
-                      loading="lazy"
+                      alt={`${cat.title} - ${i + 1}`}
+                      class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.04]"
+                      loading={catIndex === 0 && i < 4 ? 'eager' : 'lazy'}
+                      decoding="async"
                     />
-                    <div class="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/20"></div>
+                    <!-- Hover overlay -->
+                    <div class="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/30"></div>
+                    <!-- Expand icon on hover -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
+                      <div class="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center border border-white/50 bg-black/20 backdrop-blur-sm transition-transform duration-500 group-hover:scale-100 scale-75">
+                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div class="border border-dashed border-black/10 bg-gray-50/30 py-16 sm:py-20 md:py-24 text-center">
-                <svg class="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-black/15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <p class="text-xs sm:text-sm font-light text-black/30 tracking-wider">
-                  PRÓXIMAMENTE
-                </p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="border border-dashed border-white/8 py-16 sm:py-20 text-center">
+              <p class="text-[10px] sm:text-xs font-light text-white/20 tracking-[0.2em]">PRÓXIMAMENTE</p>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   </section>
 
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-400">
+    <button id="lightbox-close" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center text-white/60 hover:text-white transition-colors">
+      <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <button id="lightbox-prev" class="absolute left-2 sm:left-4 md:left-8 z-10 h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center text-white/40 hover:text-white transition-colors">
+      <svg class="h-6 w-6 sm:h-8 sm:w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-2 sm:right-4 md:right-8 z-10 h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center text-white/40 hover:text-white transition-colors">
+      <svg class="h-6 w-6 sm:h-8 sm:w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+    <div class="relative max-h-[85vh] max-w-[90vw] sm:max-w-[85vw] md:max-w-[80vw] flex items-center justify-center">
+      <img id="lightbox-img" src="" alt="" class="max-h-[85vh] max-w-full object-contain transition-transform duration-300" />
+    </div>
+    <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2">
+      <span id="lightbox-counter" class="text-[10px] sm:text-xs font-light tracking-[0.2em] text-white/40"></span>
+    </div>
+  </div>
+
   <!-- CTA Volver -->
-  <section class="bg-white py-16 sm:py-20 px-4 sm:px-6 border-t border-black/5">
+  <section class="bg-black py-16 sm:py-20 px-4 sm:px-6 border-t border-white/5">
     <div class="container mx-auto max-w-4xl text-center">
       <a 
         href="/" 
-        class="group inline-flex items-center gap-3 border border-black/20 bg-black px-10 py-4 sm:px-12 sm:py-5 text-xs sm:text-sm font-light tracking-[0.2em] text-white transition-all duration-500 hover:bg-white hover:text-black hover:border-black hover:scale-105 hover:shadow-xl"
+        class="group inline-flex items-center gap-3 border border-white/20 px-8 py-3 sm:px-10 sm:py-4 text-[10px] sm:text-xs font-light tracking-[0.2em] text-white/70 transition-all duration-500 hover:border-white hover:text-white hover:bg-white/5"
       >
-        <svg class="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
         </svg>
         VOLVER AL INICIO
       </a>
@@ -153,53 +228,166 @@ const categories = [
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  .gallery-item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .gallery-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .category-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  .category-section:last-child {
+    border-bottom: none;
+  }
 </style>
 
 <script>
-  function initFilters() {
+  function initPortfolio() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const sections = document.querySelectorAll('.category-section');
 
+    // === FILTROS ===
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
 
-        // Actualizar botón activo
         filterBtns.forEach(b => {
-          b.classList.remove('active');
-          b.classList.remove('bg-black', 'text-white', 'border-black');
-          b.classList.add('bg-white', 'text-black/70', 'border-black/20');
+          b.classList.remove('active', 'bg-white', 'text-black', 'border-white');
+          b.classList.add('border-white/15', 'text-white/50');
         });
-        btn.classList.add('active');
-        btn.classList.remove('bg-white', 'text-black/70', 'border-black/20');
-        btn.classList.add('bg-black', 'text-white', 'border-black');
+        btn.classList.add('active', 'bg-white', 'text-black', 'border-white');
+        btn.classList.remove('border-white/15', 'text-white/50');
 
-        // Filtrar secciones
         sections.forEach(section => {
-          const category = section.getAttribute('data-category');
           const el = section as HTMLElement;
+          const category = el.getAttribute('data-category');
           if (filter === 'all' || category === filter) {
             el.style.display = 'block';
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            requestAnimationFrame(() => {
-              el.style.transition = 'all 0.5s ease-out';
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0)';
+            el.querySelectorAll('.gallery-item').forEach((item, i) => {
+              const htmlItem = item as HTMLElement;
+              htmlItem.classList.remove('visible');
+              setTimeout(() => htmlItem.classList.add('visible'), 60 * i);
             });
           } else {
             el.style.display = 'none';
           }
         });
+
+        if (filter !== 'all') {
+          const target = document.querySelector(`.category-section[data-category="${filter}"]`);
+          if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        }
       });
     });
+
+    // === SCROLL REVEAL ===
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const items = entry.target.closest('.category-section')?.querySelectorAll('.gallery-item');
+          if (items) {
+            items.forEach((item, i) => {
+              setTimeout(() => (item as HTMLElement).classList.add('visible'), 80 * i);
+            });
+          }
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '50px' });
+
+    sections.forEach(section => {
+      const firstItem = section.querySelector('.gallery-item');
+      if (firstItem) revealObserver.observe(firstItem);
+    });
+
+    // === LIGHTBOX ===
+    const lightbox = document.getElementById('lightbox') as HTMLElement;
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxCounter = document.getElementById('lightbox-counter') as HTMLElement;
+
+    let currentImages: string[] = [];
+    let currentIndex = 0;
+
+    function openLightbox(src: string) {
+      const visibleSections = document.querySelectorAll('.category-section:not([style*="display: none"])');
+      currentImages = [];
+      visibleSections.forEach(s => {
+        s.querySelectorAll('.gallery-item').forEach(item => {
+          const imgSrc = item.getAttribute('data-src');
+          if (imgSrc) currentImages.push(imgSrc);
+        });
+      });
+      currentIndex = currentImages.indexOf(src);
+      if (currentIndex === -1) currentIndex = 0;
+      updateLightboxImage();
+      lightbox.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxImage() {
+      lightboxImg.src = currentImages[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+    }
+
+    function prevImage() {
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : currentImages.length - 1;
+      updateLightboxImage();
+    }
+
+    function nextImage() {
+      currentIndex = currentIndex < currentImages.length - 1 ? currentIndex + 1 : 0;
+      updateLightboxImage();
+    }
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-src');
+        if (src) openLightbox(src);
+      });
+    });
+
+    document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev')?.addEventListener('click', prevImage);
+    document.getElementById('lightbox-next')?.addEventListener('click', nextImage);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('pointer-events-none')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextImage(); else prevImage();
+      }
+    }, { passive: true });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFilters);
+    document.addEventListener('DOMContentLoaded', initPortfolio);
   } else {
-    initFilters();
+    initPortfolio();
   }
-
-  document.addEventListener('astro:page-load', initFilters);
+  document.addEventListener('astro:page-load', initPortfolio);
 </script>

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles for mobile optimization */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -18,44 +17,91 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #0a0a0a;
+    color: #faf8f5;
   }
 
-  /* Prevent horizontal overflow */
   * {
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  /* Better touch targets on mobile */
+  /* Touch targets */
   a, button {
     min-height: 44px;
     min-width: 44px;
   }
 
-  /* Prevent zoom on input focus in iOS */
   input, textarea, select {
     font-size: 16px;
   }
 
-  /* Improve image rendering */
   img {
     max-width: 100%;
     height: auto;
     display: block;
   }
+
+  /* Typography refinements */
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(201, 169, 110, 0.3);
+    color: #faf8f5;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
 }
 
 @layer components {
-  /* Container utilities */
   .safe-padding {
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
   }
 
-  /* Prevent text from being too wide on mobile */
   .readable-width {
     max-width: 65ch;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* Decorative line */
+  .line-accent {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.4), transparent);
+  }
+
+  /* Gold accent text */
+  .text-accent {
+    color: #c9a96e;
+  }
+
+  /* Smooth section transitions */
+  .section-dark {
+    background-color: #0a0a0a;
+  }
+  .section-elevated {
+    background-color: #141414;
+  }
+  .section-light {
+    background-color: #1a1a1a;
   }
 }
