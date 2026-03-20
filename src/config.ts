@@ -7,17 +7,17 @@ export const config = {
   // Información general
   siteName: 'CIAVA STUDIO',
   siteDescription: 'Fotografía y video de moda para marcas',
-  siteUrl: 'https://ciava.com.ar', // Actualizar con tu dominio
+  siteUrl: 'https://ciavastudio.com', // Dominio principal
   
   // Información de contacto
   contact: {
-    email: 'info@ciava.com.ar',
-    phone: '+54 9 11 1234-5678',
-    whatsapp: '5491234567890', // Sin espacios ni guiones
-    instagram: '@ciava.studio',
-    instagramUrl: 'https://instagram.com/ciava.studio',
-    tiktok: '@ciava.studio',
-    tiktokUrl: 'https://tiktok.com/@ciava.studio',
+    email: 'ciavastudioph@gmail.com',
+    phone: '+54 9 11 7373-8749',
+    whatsapp: '+5491173738749',
+    instagram: '@ciavastudio',
+    instagramUrl: 'https://www.instagram.com/ciavastudio/',
+    tiktok: '@ciavastudio',
+    tiktokUrl: 'https://www.tiktok.com/@ciavastudio',
   },
   
   // Equipo
@@ -70,6 +70,14 @@ export const config = {
     {
       title: 'Fotografía de producto',
       description: 'Imágenes limpias y estéticas pensadas para destacar el producto.',
+    },
+    {
+      title: 'Fotos para tu marca personal',
+      description: 'Contenido visual profesional para potenciar tu imagen personal y presencia digital.',
+    },
+    {
+      title: 'Servicios de Marketing',
+      description: 'Estrategia visual y producción de contenido para redes sociales y campañas digitales.',
     }
   ],
   

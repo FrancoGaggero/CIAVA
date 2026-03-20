@@ -5,12 +5,20 @@
 
 import anime from 'animejs';
 
+/** Check if user prefers reduced motion */
+const prefersReducedMotion = typeof window !== 'undefined' 
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /**
  * Fade in con slide desde abajo
  * @param {string|HTMLElement} element - Selector o elemento DOM
  * @param {number} delay - Delay en ms (opcional)
  */
 export function fadeInUp(element, delay = 0) {
+  if (prefersReducedMotion) {
+    anime({ targets: element, opacity: [0, 1], duration: 0 });
+    return;
+  }
   anime({
     targets: element,
     translateY: [40, 0],
@@ -27,6 +35,10 @@ export function fadeInUp(element, delay = 0) {
  * @param {number} stagger - Tiempo entre elementos en ms
  */
 export function staggerReveal(elements, stagger = 150) {
+  if (prefersReducedMotion) {
+    anime({ targets: elements, opacity: [0, 1], duration: 0 });
+    return;
+  }
   anime({
     targets: elements,
     translateY: [30, 0],
@@ -43,6 +55,10 @@ export function staggerReveal(elements, stagger = 150) {
  * @param {number} stagger - Tiempo entre elementos en ms
  */
 export function staggerGrid(elements, stagger = 100) {
+  if (prefersReducedMotion) {
+    anime({ targets: elements, opacity: [0, 1], duration: 0 });
+    return;
+  }
   anime({
     targets: elements,
     scale: [0.8, 1],
@@ -71,8 +87,8 @@ export function slideIn(element, direction = 'left', delay = 0) {
     targets: element,
     ...directions[direction],
     opacity: [0, 1],
-    duration: 1000,
-    delay: delay,
+    duration: prefersReducedMotion ? 0 : 1000,
+    delay: prefersReducedMotion ? 0 : delay,
     easing: 'easeOutCubic',
   });
 }

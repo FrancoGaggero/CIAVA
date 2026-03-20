@@ -9,11 +9,15 @@ import Header from '../components/Header.astro';
 interface Props {
 	title?: string;
 	description?: string;
+	ogImage?: string;
 }
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://ciavastudio.com');
 
 const { 
 	title = 'CIAVA Studio — Fotografía y Video de Moda',
-	description = 'Estudio creativo especializado en producción de contenido visual para marcas. Fotografía de moda, video, estilismo y dirección creativa en Buenos Aires.'
+	description = 'Estudio creativo especializado en producción de contenido visual para marcas. Fotografía de moda, video, estilismo y dirección creativa en Buenos Aires.',
+	ogImage = '/og-image.jpg'
 } = Astro.props;
 ---
 
@@ -29,14 +33,69 @@ const {
 		<!-- SEO -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL.href} />
+		<meta name="robots" content="index, follow" />
+		<meta name="author" content="CIAVA Studio" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(ogImage, canonicalURL.origin).href} />
+		<meta property="og:locale" content="es_AR" />
+		<meta property="og:site_name" content="CIAVA Studio" />
+
+		<!-- Twitter / X -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(ogImage, canonicalURL.origin).href} />
+
+		<!-- Structured Data: Local Business -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "ProfessionalService",
+			"name": "CIAVA Studio",
+			"description": description,
+			"url": "https://ciavastudio.com",
+			"telephone": "+5491173738749",
+			"email": "ciavastudioph@gmail.com",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Nordelta",
+				"addressRegion": "Buenos Aires",
+				"addressCountry": "AR"
+			},
+			"sameAs": [
+				"https://instagram.com/ciavastudio/",
+				"https://tiktok.com/@ciavastudio"
+			],
+			"image": new URL(ogImage, "https://ciavastudio.com").href,
+			"priceRange": "$$",
+			"areaServed": "Buenos Aires, Argentina"
+		})} />
 		
 		<!-- Google Fonts: Cormorant Garamond (headings) + Inter (body) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link 
-			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" 
-			rel="stylesheet" 
+			rel="preload"
+			as="style"
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
 		/>
+		<link 
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" 
+			rel="stylesheet"
+			media="print"
+			onload="this.media='all'"
+		/>
+		<noscript>
+			<link 
+				href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" 
+				rel="stylesheet" 
+			/>
+		</noscript>
 	</head>
 	<body class="antialiased bg-ciava-black font-sans">
 		<Header />

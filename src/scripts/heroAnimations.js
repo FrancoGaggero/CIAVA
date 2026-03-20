@@ -4,6 +4,10 @@
  */
 import anime from 'animejs';
 
+/** Check if user prefers reduced motion */
+const prefersReducedMotion = typeof window !== 'undefined'
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /**
  * Efecto de escritura elegante para el título
  */
@@ -54,6 +58,14 @@ export function typewriterEffect() {
  * Inicializar animaciones del hero
  */
 function initHeroAnimations() {
+  // If user prefers reduced motion, show content immediately
+  if (prefersReducedMotion) {
+    const titleElement = document.getElementById('hero-title');
+    const subtitleElement = document.getElementById('hero-subtitle');
+    if (titleElement) titleElement.style.opacity = '1';
+    if (subtitleElement) subtitleElement.style.opacity = '1';
+    return;
+  }
   // Esperar un momento para que la página cargue
   setTimeout(() => {
     typewriterEffect();
