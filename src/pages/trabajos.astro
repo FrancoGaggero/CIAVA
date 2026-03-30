@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
+import { Image, getImage } from 'astro:assets';
 
 /**
  * Página de Trabajos / Portfolio
@@ -15,42 +16,34 @@ const deportivaImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/im
 const accesoriosImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/accesorios/*', { eager: true });
 const modelTestImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/model test/*', { eager: true });
 
-function extractSrcs(modules: Record<string, { default: ImageMetadata }>) {
-  return Object.values(modules).map(m => m.default.src);
+function extractImages(modules: Record<string, { default: ImageMetadata }>) {
+  return Object.values(modules).map(m => m.default);
 }
 
-const categories = [
-  {
-    id: 'indumentaria',
-    title: 'INDUMENTARIA',
-    photos: extractSrcs(indumentariaImgs),
-  },
-  {
-    id: 'bikinis',
-    title: 'BIKINIS',
-    photos: extractSrcs(bikinisImgs),
-  },
-  {
-    id: 'calzado-carteras',
-    title: 'CALZADO & CARTERAS',
-    photos: extractSrcs(calzadoImgs),
-  },
-  {
-    id: 'ropa-deportiva',
-    title: 'ROPA DEPORTIVA',
-    photos: extractSrcs(deportivaImgs),
-  },
-  {
-    id: 'accesorios',
-    title: 'ACCESORIOS',
-    photos: extractSrcs(accesoriosImgs),
-  },
-  {
-    id: 'model-test',
-    title: 'MODEL TEST',
-    photos: extractSrcs(modelTestImgs),
-  },
+// Pre-generate optimized thumbnails for the gallery grid
+async function generateOptimizedImages(images: ImageMetadata[]) {
+  return Promise.all(images.map(async (img) => {
+    const thumb = await getImage({ src: img, width: 600, quality: 75, format: 'webp' });
+    const full = await getImage({ src: img, width: 1400, quality: 80, format: 'webp' });
+    return { thumb: thumb.src, full: full.src, metadata: img };
+  }));
+}
+
+const categoriesRaw = [
+  { id: 'indumentaria', title: 'INDUMENTARIA', images: extractImages(indumentariaImgs) },
+  { id: 'bikinis', title: 'BIKINIS', images: extractImages(bikinisImgs) },
+  { id: 'calzado-carteras', title: 'CALZADO & CARTERAS', images: extractImages(calzadoImgs) },
+  { id: 'ropa-deportiva', title: 'ROPA DEPORTIVA', images: extractImages(deportivaImgs) },
+  { id: 'accesorios', title: 'ACCESORIOS', images: extractImages(accesoriosImgs) },
+  { id: 'model-test', title: 'MODEL TEST', images: extractImages(modelTestImgs) },
 ];
+
+const categories = await Promise.all(
+  categoriesRaw.map(async (cat) => ({
+    ...cat,
+    photos: await generateOptimizedImages(cat.images),
+  }))
+);
 
 const totalPhotos = categories.reduce((acc, cat) => acc + cat.photos.length, 0);
 ---
@@ -146,7 +139,7 @@ const totalPhotos = categories.reduce((acc, cat) => acc + cat.photos.length, 0);
                       ? 'col-span-2 row-span-2' 
                       : ''
                   }`}
-                  data-src={photo}
+                  data-src={photo.full}
                 >
                   <div class={`relative w-full ${
                     cat.photos.length >= 6 && i === 0 
@@ -154,11 +147,13 @@ const totalPhotos = categories.reduce((acc, cat) => acc + cat.photos.length, 0);
                       : 'aspect-[3/4]'
                   }`}>
                     <img 
-                      src={photo} 
-                      alt={`${cat.title} - ${i + 1}`}
+                      src={photo.thumb} 
+                      alt={`${cat.title} - Foto ${i + 1}`}
                       class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.04]"
                       loading={catIndex === 0 && i < 4 ? 'eager' : 'lazy'}
                       decoding="async"
+                      width="600"
+                      height="800"
                     />
                     <!-- Hover overlay -->
                     <div class="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/30"></div>
