@@ -1,30 +1,47 @@
 ---
 /**
  * Hero Component
- * Imagen apaisada con título CIAVA STUDIO
+ * Imagen vertical para mobile, horizontal para desktop
  */
 import { Image } from 'astro:assets';
-import heroImage from '../assets/images/hero/fondo.jpeg';
+import heroMobile from '../assets/images/hero/fondo.jpeg';
+import heroDesktop from '../assets/images/hero/fondoDesktop.jpeg';
 ---
 
 <section id="hero" class="relative min-h-screen w-full overflow-hidden bg-ciava-black">
-  <!-- Imagen con overlay cinematográfico -->
-  <div class="absolute inset-0">
+  <!-- Imagen mobile (vertical) - visible solo en mobile/tablet -->
+  <div class="absolute inset-0 md:hidden">
     <Image 
-      src={heroImage} 
+      src={heroMobile} 
       alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires" 
       class="h-full w-full object-cover opacity-60"
-      style="object-position: center center;"
-      widths={[640, 960, 1280, 1920]}
+      style="object-position: center 1%;"
+      widths={[640, 960]}
       sizes="100vw"
       loading="eager"
       decoding="async"
       quality={80}
     />
-    <div class="absolute inset-0 bg-gradient-to-b from-ciava-black/50 via-ciava-black/10 to-ciava-black/80"></div>
-    <!-- Vignette -->
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 50%, rgba(10,10,10,0.6) 100%);"></div>
   </div>
+
+  <!-- Imagen desktop (horizontal) - visible solo en desktop -->
+  <div class="absolute inset-0 hidden md:block">
+    <Image 
+      src={heroDesktop} 
+      alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires" 
+      class="h-full w-full object-cover opacity-60"
+      style="object-position: center center;"
+      widths={[1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      decoding="async"
+      quality={80}
+    />
+  </div>
+
+  <!-- Overlays (compartidos) -->
+  <div class="absolute inset-0 bg-gradient-to-b from-ciava-black/50 via-ciava-black/10 to-ciava-black/80"></div>
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 50%, rgba(10,10,10,0.6) 100%);"></div>
 
   <!-- Contenido centrado -->
   <div class="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-20">
