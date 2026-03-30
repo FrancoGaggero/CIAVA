@@ -1,0 +1,2 @@
+# Redirect www to non-www
+https://www.ciavastudio.com/* https://ciavastudio.com/:splat 301

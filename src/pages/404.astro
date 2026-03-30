@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+	title="Página no encontrada - CIAVA Studio"
+	description="La página que buscás no existe. Volvé al inicio de CIAVA Studio."
+>
+	<section class="flex min-h-screen flex-col items-center justify-center bg-ciava-black px-6 py-20 text-center">
+		<div class="mb-6 h-px w-12 bg-gradient-to-r from-transparent via-ciava-gold/40 to-transparent"></div>
+		<h1 class="mb-4 font-serif text-6xl font-light tracking-[0.15em] text-ciava-warm sm:text-8xl">
+			404
+		</h1>
+		<p class="mb-8 text-sm font-light tracking-wider text-white/50 sm:text-base">
+			La página que buscás no existe
+		</p>
+		<a 
+			href="/" 
+			class="border border-ciava-gold/30 px-8 py-3 text-xs font-light tracking-[0.2em] text-ciava-gold/90 transition-all duration-300 hover:border-ciava-gold hover:bg-ciava-gold hover:text-ciava-black"
+		>
+			VOLVER AL INICIO
+		</a>
+	</section>
+</Layout>

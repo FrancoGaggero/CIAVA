@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+
+# Crawl-delay for polite bots
+Crawl-delay: 1
 
 Sitemap: https://ciavastudio.com/sitemap-index.xml

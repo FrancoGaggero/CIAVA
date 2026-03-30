@@ -7,4 +7,24 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: 'https://ciavastudio.com',
 	integrations: [tailwind(), sitemap()],
+	compressHTML: true,
+	build: {
+		inlineStylesheets: 'auto',
+	},
+	image: {
+		domains: [],
+		remotePatterns: [],
+	},
+	vite: {
+		build: {
+			cssMinify: true,
+			rollupOptions: {
+				output: {
+					manualChunks: {
+						anime: ['animejs'],
+					},
+				},
+			},
+		},
+	},
 });

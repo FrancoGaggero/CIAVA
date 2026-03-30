@@ -10,6 +10,8 @@ interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	keywords?: string;
+	type?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://ciavastudio.com');
@@ -17,7 +19,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://ciavastudio.com');
 const { 
 	title = 'CIAVA Studio — Fotografía y Video de Moda',
 	description = 'Estudio creativo especializado en producción de contenido visual para marcas. Fotografía de moda, video, estilismo y dirección creativa en Buenos Aires.',
-	ogImage = '/og-image.jpg'
+	ogImage = '/og-image.jpg',
+	keywords = 'fotografía moda, producción editorial, video moda, estilismo, polas modelos, fotografía producto, ciava studio, fotógrafa buenos aires, estudio fotográfico nordelta, contenido visual marcas',
+	type = 'website',
 } = Astro.props;
 ---
 
@@ -27,22 +31,28 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#0a0a0a" />
 		
 		<!-- SEO -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
 		<link rel="canonical" href={canonicalURL.href} />
-		<meta name="robots" content="index, follow" />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 		<meta name="author" content="CIAVA Studio" />
+		<meta name="geo.region" content="AR-B" />
+		<meta name="geo.placename" content="Buenos Aires, Argentina" />
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={type} />
 		<meta property="og:url" content={canonicalURL.href} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={new URL(ogImage, canonicalURL.origin).href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:locale" content="es_AR" />
 		<meta property="og:site_name" content="CIAVA Studio" />
 
@@ -67,18 +77,60 @@ const {
 				"addressRegion": "Buenos Aires",
 				"addressCountry": "AR"
 			},
+			"geo": {
+				"@type": "GeoCoordinates",
+				"latitude": -34.4047,
+				"longitude": -58.6646
+			},
 			"sameAs": [
-				"https://instagram.com/ciavastudio/",
-				"https://tiktok.com/@ciavastudio"
+				"https://www.instagram.com/ciavastudio/",
+				"https://www.tiktok.com/@ciavastudio"
 			],
 			"image": new URL(ogImage, "https://ciavastudio.com").href,
 			"priceRange": "$$",
-			"areaServed": "Buenos Aires, Argentina"
+			"areaServed": {
+				"@type": "City",
+				"name": "Buenos Aires"
+			},
+			"serviceType": [
+				"Fotografía de Moda",
+				"Video para Marcas",
+				"Estilismo",
+				"Fotografía de Producto",
+				"Polas para Modelos"
+			],
+			"openingHoursSpecification": {
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+				"opens": "09:00",
+				"closes": "18:00"
+			}
 		})} />
 		
-		<!-- Google Fonts: Cormorant Garamond (headings) + Inter (body) -->
+		<!-- Structured Data: WebSite (for search box) -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"name": "CIAVA Studio",
+			"url": "https://ciavastudio.com",
+			"description": "Estudio creativo especializado en producción de contenido visual para marcas de moda en Buenos Aires.",
+			"publisher": {
+				"@type": "Organization",
+				"name": "CIAVA Studio",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "https://ciavastudio.com/favicon.svg"
+				}
+			}
+		})} />
+
+		<!-- DNS Prefetch & Preconnect -->
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		
+		<!-- Google Fonts: Cormorant Garamond (headings) + Inter (body) -->
 		<link 
 			rel="preload"
 			as="style"
