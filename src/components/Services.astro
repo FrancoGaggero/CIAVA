@@ -54,7 +54,7 @@ const services = [
     <!-- Lista de servicios -->
     <div class="space-y-4 sm:space-y-5">
       {services.map((service, index) => (
-        <div class="service-card group relative border border-white/5 bg-ciava-charcoal/30 p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-500 hover:border-ciava-gold/15 hover:bg-ciava-charcoal/60 hover:shadow-elevation-2 hover:-translate-y-0.5 overflow-hidden">
+          <div class="service-card group relative border border-white/5 bg-ciava-charcoal/30 p-5 sm:p-6 md:p-8 lg:p-10 transition-[opacity,transform,border-color,background-color,box-shadow] duration-500 hover:border-ciava-gold/15 hover:bg-ciava-charcoal/60 hover:shadow-elevation-2 hover:-translate-y-0.5 overflow-hidden" style={`--card-index: ${index}`}>
           <!-- Background animado en hover -->
           <div class="absolute inset-0 bg-gradient-to-r from-ciava-gold/0 via-ciava-gold/[0.03] to-ciava-gold/0 translate-x-[-100%] transition-transform duration-700 group-hover:translate-x-[100%]"></div>
           
@@ -78,41 +78,58 @@ const services = [
 </section>
 
 <script>
-  import anime from 'animejs';
-
   function initServicesAnimations() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    
+    const serviceCards = document.querySelectorAll<HTMLElement>('.service-card');
     if (!serviceCards.length) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
-          entry.target.setAttribute('data-animated', 'true');
-          
-          const cards = Array.from(serviceCards);
-          const index = cards.indexOf(entry.target);
-          
-          anime({
-            targets: entry.target,
-            opacity: [0, 1],
-            translateX: [-40, 0],
-            duration: 800,
-            delay: index * 150,
-            easing: 'easeOutCubic',
-          });
-        }
-      });
-    }, { threshold: 0.1 });
-    
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Collect all newly intersecting cards and stagger them together
+        const entering = entries
+          .filter(e => e.isIntersecting && !e.target.hasAttribute('data-animated'))
+          .map(e => e.target as HTMLElement);
+
+        entering.forEach((card, batchIndex) => {
+          card.setAttribute('data-animated', 'true');
+          // Use a per-batch stagger so cards visible at once animate together
+          const delay = batchIndex * 80;
+          card.style.transitionDelay = `${delay}ms`;
+          card.classList.add('is-visible');
+          observer.unobserve(card);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
     serviceCards.forEach(card => observer.observe(card));
   }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initServicesAnimations);
-  } else {
+
+  function setup() {
     initServicesAnimations();
   }
-  
-  document.addEventListener('astro:page-load', initServicesAnimations);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
+
+  document.addEventListener('astro:page-load', setup);
 </script>
+
+<style>
+  .service-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition-property: opacity, transform, border-color, background-color, box-shadow;
+    transition-duration: 600ms;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-delay: 0ms;
+    will-change: opacity, transform;
+  }
+
+  .service-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

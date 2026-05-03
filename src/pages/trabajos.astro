@@ -141,10 +141,10 @@ const totalPhotos = categories.reduce((acc, cat) => acc + cat.photos.length, 0);
                   }`}
                   data-src={photo.full}
                 >
-                  <div class={`relative w-full ${
+                  <div class={`${
                     cat.photos.length >= 6 && i === 0 
-                      ? 'aspect-square' 
-                      : 'aspect-[3/4]'
+                      ? 'absolute inset-0' 
+                      : 'relative w-full aspect-[3/4]'
                   }`}>
                     <img 
                       src={photo.thumb} 
