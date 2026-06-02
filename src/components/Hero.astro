@@ -26,10 +26,10 @@ import heroDesktop from '../assets/images/hero/fondoDesktop.jpeg';
 
   <!-- Imagen desktop (horizontal) - visible solo en desktop -->
   <div class="absolute inset-0 hidden md:block">
-    <Image 
-      src={heroDesktop} 
-      alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires" 
-      class="h-full w-full object-cover opacity-60"
+    <Image
+      src={heroDesktop}
+      alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires"
+      class="h-full w-full object-cover opacity-[0.72]"
       style="object-position: center center;"
       widths={[1280, 1920]}
       sizes="100vw"
@@ -40,8 +40,11 @@ import heroDesktop from '../assets/images/hero/fondoDesktop.jpeg';
   </div>
 
   <!-- Overlays (compartidos) -->
-  <div class="absolute inset-0 bg-gradient-to-b from-ciava-black/50 via-ciava-black/10 to-ciava-black/80"></div>
-  <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 50%, rgba(10,10,10,0.6) 100%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-ciava-black/60 via-ciava-black/15 to-ciava-black/85"></div>
+  <!-- Refuerzo de legibilidad detrás del título -->
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 45% at center 48%, rgba(10,10,10,0.55) 0%, transparent 70%);"></div>
+  <!-- Viñeta envolvente -->
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 45%, rgba(10,10,10,0.7) 100%);"></div>
 
   <!-- Contenido centrado -->
   <div class="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-20">

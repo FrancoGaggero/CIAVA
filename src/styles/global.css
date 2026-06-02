@@ -9,6 +9,11 @@
     text-size-adjust: 100%;
   }
 
+  /* Compensar el header fijo al navegar por anclas (#about, #services, ...) */
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+
   body {
     margin: 0;
     padding: 0;
@@ -47,6 +52,34 @@
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 300;
     letter-spacing: 0.08em;
+    /* Saltos de línea más equilibrados en títulos */
+    text-wrap: balance;
+  }
+
+  /* Párrafos con cortes de línea más prolijos (sin huérfanas) */
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Imágenes con render más nítido al escalar */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* Foco visible accesible y acorde a la marca (solo teclado) */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 1px solid rgba(201, 169, 110, 0.75);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+  /* Evitar anillo de foco al hacer click con mouse */
+  a:focus:not(:focus-visible),
+  button:focus:not(:focus-visible) {
+    outline: none;
   }
 
   /* Selection color */
