@@ -908,9 +908,27 @@ const galleryPhotos = [
     animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  /* Smooth transitions */
+  /* Reveal suave en scroll (sin parpadeo) */
   .equipment-card {
-    will-change: transform;
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+    will-change: opacity, transform;
+  }
+
+  .equipment-card.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equipment-card {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 
   .stat-item {
@@ -961,36 +979,36 @@ const galleryPhotos = [
   // Hero slideshow (kept for future use if needed)
   function initHeroSlideshow() {}
 
-  // Animación de aparición para equipment cards
+  // Aparición para equipment cards: reveal limpio por clase, con escalonado
+  // suave solo entre las tarjetas que entran juntas (sin dejarlas en blanco).
   function initEquipmentAnimations() {
     const equipmentCards = document.querySelectorAll(".equipment-card");
 
     if (!equipmentCards.length) return;
 
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      equipmentCards.forEach((card) => card.classList.add("revealed"));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (
-            entry.isIntersecting &&
-            !entry.target.hasAttribute("data-animated")
-          ) {
-            entry.target.setAttribute("data-animated", "true");
+        const entering = entries
+          .filter(
+            (entry) =>
+              entry.isIntersecting &&
+              !entry.target.classList.contains("revealed"),
+          )
+          .map((entry) => entry.target as HTMLElement);
 
-            const cards = Array.from(equipmentCards);
-            const index = cards.indexOf(entry.target);
-
-            anime({
-              targets: entry.target,
-              opacity: [0, 1],
-              translateY: [40, 0],
-              duration: 800,
-              delay: index * 100,
-              easing: "easeOutCubic",
-            });
-          }
+        entering.forEach((card, i) => {
+          card.style.transitionDelay = `${i * 80}ms`;
+          card.classList.add("revealed");
+          observer.unobserve(card);
         });
       },
-      { threshold: 0.1 },
+      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" },
     );
 
     equipmentCards.forEach((card) => observer.observe(card));
