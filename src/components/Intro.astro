@@ -4,8 +4,11 @@
  * Descripción del estudio
  */
 import { Image } from 'astro:assets';
-import muestra1 from '../assets/images/studio/muestra1.jpeg';
-import muestra3 from '../assets/images/studio/muestra2.jpeg';
+import { resolveImage } from '../lib/images';
+import intro from '../data/intro.json';
+
+const muestra1 = resolveImage(intro.muestra1);
+const muestra3 = resolveImage(intro.muestra2);
 ---
 
 <section id="intro" class="bg-ciava-dark py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6">
@@ -15,17 +18,14 @@ import muestra3 from '../assets/images/studio/muestra2.jpeg';
         <div class="mb-6 sm:mb-8 inline-block">
           <div class="line-accent w-10 sm:w-12 mx-auto mb-6 sm:mb-8"></div>
           <h2 class="mb-6 sm:mb-8 text-2xl sm:text-3xl md:text-4xl font-serif font-light tracking-[0.15em] text-ciava-warm">
-            EL ESTUDIO
+            {intro.title}
           </h2>
           <div class="line-accent w-10 sm:w-12 mx-auto"></div>
         </div>
         <div class="space-y-4 sm:space-y-6 md:space-y-8 text-sm sm:text-base md:text-lg leading-relaxed text-white/60 lg:text-xl font-light max-w-3xl mx-auto">
-          <p class="tracking-wide">
-            Somos un estudio creativo especializado en producción de contenido visual para marcas.
-          </p>
-          <p class="tracking-wide">
-            Creamos imágenes y videos que comunican identidad, elevan el producto y potencian la presencia.
-          </p>
+          {intro.text.map((parrafo) => (
+            <p class="tracking-wide">{parrafo}</p>
+          ))}
         </div>
       </div>
 
@@ -33,9 +33,9 @@ import muestra3 from '../assets/images/studio/muestra2.jpeg';
       <div>
         <div class="mb-10 sm:mb-12 md:mb-14">
           <h3 class="text-lg sm:text-xl font-serif font-light tracking-[0.15em] text-ciava-warm md:text-2xl mb-2 sm:mb-3">
-            TRABAJA CON NOSOTROS
+            {intro.ctaTitle}
           </h3>
-          <p class="text-xs sm:text-sm font-light text-ciava-gold/60">Acá nace tu imagen</p>
+          <p class="text-xs sm:text-sm font-light text-ciava-gold/60">{intro.ctaSubtitle}</p>
         </div>
 
         <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8">

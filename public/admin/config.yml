@@ -1,0 +1,249 @@
+# Configuración del panel de administración de CIAVA (Sveltia CMS)
+# Docs: https://github.com/sveltia/sveltia-cms  (compatible con Decap CMS)
+#
+# El panel guarda los cambios como commits en este repositorio de GitHub; Netlify
+# reconstruye el sitio automáticamente en cada commit.
+
+backend:
+  name: github
+  repo: FrancoGaggero/CIAVA
+  branch: main
+
+# Modo local: al abrir /admin en localhost, el panel puede trabajar directamente con
+# los archivos de tu computadora (para probar sin GitHub). En el sitio publicado se
+# ignora automáticamente y se usa el backend de GitHub de arriba.
+local_backend: true
+
+# Idioma de la interfaz del panel
+locale: es
+
+# Mostrar cambios sin publicar como Pull Requests (false = publica directo a main)
+publish_mode: simple
+
+# Carpeta por defecto para imágenes subidas que no tengan una carpeta propia
+media_folder: "src/assets/images/uploads"
+public_folder: "/src/assets/images/uploads"
+
+collections:
+  # ===========================================================================
+  # TEXTOS DEL SITIO
+  # ===========================================================================
+  - name: textos
+    label: "Textos del sitio"
+    label_singular: "Texto"
+    description: "Editá los textos e imágenes destacadas de la página principal."
+    files:
+      # ----- Portada / Hero -----
+      - name: hero
+        label: "Portada (Hero)"
+        file: "src/data/hero.json"
+        fields:
+          - { name: title, label: "Título principal", widget: string }
+          - { name: subtitle, label: "Subtítulo", widget: string }
+          - { name: imageMobile, label: "Fondo — celular (vertical)", widget: image, media_folder: "/src/assets/images/hero", public_folder: "/src/assets/images/hero" }
+          - { name: imageDesktop, label: "Fondo — escritorio (horizontal)", widget: image, media_folder: "/src/assets/images/hero", public_folder: "/src/assets/images/hero" }
+
+      # ----- Sección "El estudio" -----
+      - name: intro
+        label: 'Sección "El estudio"'
+        file: "src/data/intro.json"
+        fields:
+          - { name: title, label: "Título", widget: string }
+          - name: text
+            label: "Párrafos"
+            widget: list
+            field: { label: "Párrafo", name: parrafo, widget: text }
+          - { name: ctaTitle, label: "Título del bloque inferior", widget: string }
+          - { name: ctaSubtitle, label: "Subtítulo del bloque inferior", widget: string }
+          - { name: muestra1, label: "Foto muestra 1", widget: image, media_folder: "/src/assets/images/studio", public_folder: "/src/assets/images/studio" }
+          - { name: muestra2, label: "Foto muestra 2", widget: image, media_folder: "/src/assets/images/studio", public_folder: "/src/assets/images/studio" }
+
+      # ----- Servicios -----
+      - name: servicios
+        label: "Servicios"
+        file: "src/data/services.json"
+        fields:
+          - name: services
+            label: "Lista de servicios"
+            label_singular: "Servicio"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: "Título", widget: string }
+              - { name: description, label: "Descripción", widget: text }
+
+      # ----- Equipo / Quiénes somos -----
+      - name: equipo
+        label: "Equipo (Quiénes somos)"
+        file: "src/data/team.json"
+        fields:
+          - name: intro
+            label: "Introducción"
+            widget: object
+            fields:
+              - { name: title, label: "Título", widget: string }
+              - name: text
+                label: "Párrafos"
+                widget: list
+                field: { label: "Párrafo", name: parrafo, widget: text }
+          - name: florencia
+            label: "Florencia"
+            widget: object
+            fields:
+              - { name: name, label: "Nombre", widget: string }
+              - { name: role, label: "Rol", widget: string }
+              - { name: instagram, label: "Instagram (con @)", widget: string }
+              - { name: instagramUrl, label: "Link de Instagram", widget: string }
+              - { name: photo, label: "Foto de perfil", widget: image, media_folder: "/src/assets/images", public_folder: "/src/assets/images" }
+              - name: bio
+                label: "Biografía (párrafos)"
+                widget: list
+                field: { label: "Párrafo", name: parrafo, widget: text }
+          - name: valentina
+            label: "Valentina"
+            widget: object
+            fields:
+              - { name: name, label: "Nombre", widget: string }
+              - { name: role, label: "Rol", widget: string }
+              - { name: instagram, label: "Instagram (con @)", widget: string }
+              - { name: instagramUrl, label: "Link de Instagram", widget: string }
+              - { name: photo, label: "Foto de perfil", widget: image, media_folder: "/src/assets/images", public_folder: "/src/assets/images" }
+              - name: bio
+                label: "Biografía (párrafos)"
+                widget: list
+                field: { label: "Párrafo", name: parrafo, widget: text }
+
+      # ----- Contacto y datos generales -----
+      - name: contacto
+        label: "Contacto y datos generales"
+        file: "src/data/settings.json"
+        fields:
+          - { name: siteName, label: "Nombre del sitio", widget: string }
+          - { name: siteDescription, label: "Descripción corta", widget: string }
+          - name: contact
+            label: "Contacto"
+            widget: object
+            fields:
+              - { name: email, label: "Email", widget: string }
+              - { name: phone, label: "Teléfono (texto visible)", widget: string }
+              - { name: whatsapp, label: "WhatsApp (con código de país, sin espacios)", widget: string, hint: "Ej: +5491173738749" }
+              - { name: location, label: "Ubicación", widget: string }
+              - { name: instagram, label: "Instagram (con @)", widget: string }
+              - { name: instagramUrl, label: "Link de Instagram", widget: string }
+              - { name: tiktok, label: "TikTok (con @)", widget: string }
+              - { name: tiktokUrl, label: "Link de TikTok", widget: string }
+
+  # ===========================================================================
+  # PORTFOLIO — un archivo por categoría, con fotos reordenables
+  # ===========================================================================
+  - name: portfolio
+    label: "Portfolio"
+    label_singular: "Categoría"
+    description: "Agregá, borrá o reordená las fotos de cada categoría (arrastrá para reordenar)."
+    files:
+      - name: indumentaria
+        label: "Indumentaria"
+        file: "src/data/portfolio/indumentaria.json"
+        fields:
+          - { name: title, label: "Nombre de la categoría", widget: string }
+          - { name: order, label: "Orden", widget: number, value_type: int, default: 1 }
+          - name: images
+            label: "Fotos"
+            label_singular: "Foto"
+            widget: list
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/indumentaria", public_folder: "/src/assets/images/portfolio/indumentaria" }
+              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+
+      - name: bikinis
+        label: "Bikinis"
+        file: "src/data/portfolio/bikinis.json"
+        fields:
+          - { name: title, label: "Nombre de la categoría", widget: string }
+          - { name: order, label: "Orden", widget: number, value_type: int, default: 2 }
+          - name: images
+            label: "Fotos"
+            label_singular: "Foto"
+            widget: list
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/bikinis", public_folder: "/src/assets/images/portfolio/bikinis" }
+              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+
+      - name: calzado-carteras
+        label: "Calzado & Carteras"
+        file: "src/data/portfolio/calzado-carteras.json"
+        fields:
+          - { name: title, label: "Nombre de la categoría", widget: string }
+          - { name: order, label: "Orden", widget: number, value_type: int, default: 3 }
+          - name: images
+            label: "Fotos"
+            label_singular: "Foto"
+            widget: list
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/calzado- carteras", public_folder: "/src/assets/images/portfolio/calzado- carteras" }
+              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+
+      - name: ropa-deportiva
+        label: "Ropa Deportiva"
+        file: "src/data/portfolio/ropa-deportiva.json"
+        fields:
+          - { name: title, label: "Nombre de la categoría", widget: string }
+          - { name: order, label: "Orden", widget: number, value_type: int, default: 4 }
+          - name: images
+            label: "Fotos"
+            label_singular: "Foto"
+            widget: list
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/ropa deportiva", public_folder: "/src/assets/images/portfolio/ropa deportiva" }
+              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+
+      - name: accesorios
+        label: "Accesorios"
+        file: "src/data/portfolio/accesorios.json"
+        fields:
+          - { name: title, label: "Nombre de la categoría", widget: string }
+          - { name: order, label: "Orden", widget: number, value_type: int, default: 5 }
+          - name: images
+            label: "Fotos"
+            label_singular: "Foto"
+            widget: list
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/accesorios", public_folder: "/src/assets/images/portfolio/accesorios" }
+              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+
+      - name: model-test
+        label: "Model Test"
+        file: "src/data/portfolio/model-test.json"
+        fields:
+          - { name: title, label: "Nombre de la categoría", widget: string }
+          - { name: order, label: "Orden", widget: number, value_type: int, default: 6 }
+          - name: images
+            label: "Fotos"
+            label_singular: "Foto"
+            widget: list
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/model test", public_folder: "/src/assets/images/portfolio/model test" }
+              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+
+  # ===========================================================================
+  # PÁGINA DEL ESTUDIO (Nordelta) — 5 fotos fijas (se pueden reemplazar)
+  # ===========================================================================
+  - name: estudio
+    label: "Página del estudio (Nordelta)"
+    label_singular: "Fotos del estudio"
+    files:
+      - name: fotos
+        label: "Fotos del estudio"
+        file: "src/data/estudio.json"
+        fields:
+          - { name: foto1, label: "Foto 1 (grande, arriba a la izquierda)", widget: image, media_folder: "/src/assets/images/estudio", public_folder: "/src/assets/images/estudio" }
+          - { name: foto2, label: "Foto 2", widget: image, media_folder: "/src/assets/images/estudio", public_folder: "/src/assets/images/estudio" }
+          - { name: foto3, label: "Foto 3", widget: image, media_folder: "/src/assets/images/estudio", public_folder: "/src/assets/images/estudio" }
+          - { name: foto4, label: "Foto 4", widget: image, media_folder: "/src/assets/images/estudio", public_folder: "/src/assets/images/estudio" }
+          - { name: foto5, label: "Foto 5", widget: image, media_folder: "/src/assets/images/estudio", public_folder: "/src/assets/images/estudio" }

@@ -3,6 +3,10 @@
  * Contact Component
  * Información de contacto y redes sociales
  */
+import settings from '../data/settings.json';
+
+const { contact } = settings;
+const whatsappUrl = `https://wa.me/${contact.whatsapp}`;
 ---
 
 <section id="contact" class="bg-ciava-black py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6">
@@ -30,8 +34,8 @@
               </svg>
               <div class="min-w-0">
                 <p class="text-[10px] tracking-wider text-ciava-gold/40 uppercase mb-1 sm:text-xs">Email</p>
-                <a href="mailto:ciavastudioph@gmail.com" class="hover:text-ciava-gold transition-colors break-all">
-                  ciavastudioph@gmail.com
+                <a href={`mailto:${contact.email}`} class="hover:text-ciava-gold transition-colors break-all">
+                  {contact.email}
                 </a>
               </div>
             </div>
@@ -41,8 +45,8 @@
               </svg>
               <div class="min-w-0">
                 <p class="text-[10px] tracking-wider text-ciava-gold/40 uppercase mb-1 sm:text-xs">WhatsApp</p>
-                <a href="https://wa.me/+5491173738749" target="_blank" rel="noopener noreferrer" class="hover:text-ciava-gold transition-colors">
-                  +54 9 11 7373-8749
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="hover:text-ciava-gold transition-colors">
+                  {contact.phone}
                 </a>
               </div>
             </div>
@@ -53,7 +57,7 @@
               </svg>
               <div class="min-w-0">
                 <p class="text-[10px] tracking-wider text-ciava-gold/40 uppercase mb-1 sm:text-xs">Ubicación</p>
-                <p>Buenos Aires, Argentina</p>
+                <p>{contact.location}</p>
               </div>
             </div>
           </div>
@@ -66,9 +70,9 @@
           </h3>
           <div class="space-y-4 sm:space-y-6">
             <!-- Instagram -->
-            <a 
-              href="https://www.instagram.com/ciavastudio/" 
-              target="_blank" 
+            <a
+              href={contact.instagramUrl}
+              target="_blank"
               rel="noopener noreferrer"
               class="contact-icon group flex items-center gap-4 transition-all duration-300"
             >
@@ -79,7 +83,7 @@
               </div>
               <div class="flex-1">
                 <p class="text-xs tracking-wider text-ciava-gold/40 uppercase mb-0.5">Instagram</p>
-                <p class="text-sm font-light text-white/50 transition-colors group-hover:text-ciava-gold">@ciavastudio</p>
+                <p class="text-sm font-light text-white/50 transition-colors group-hover:text-ciava-gold">{contact.instagram}</p>
               </div>
               <svg class="h-5 w-5 text-white/10 transition-all duration-300 group-hover:translate-x-1 group-hover:text-ciava-gold/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
@@ -88,8 +92,8 @@
 
             <!-- TikTok -->
             <a 
-              href="https://www.tiktok.com/@ciavastudio?_r=1&_t=ZM-938OlWag9Ye" 
-              target="_blank" 
+              href={contact.tiktokUrl}
+              target="_blank"
               rel="noopener noreferrer"
               class="contact-icon group flex items-center gap-4 transition-all duration-300"
             >
@@ -100,7 +104,7 @@
               </div>
               <div class="flex-1">
                 <p class="text-xs tracking-wider text-ciava-gold/40 uppercase mb-0.5">TikTok</p>
-                <p class="text-sm font-light text-white/50 transition-colors group-hover:text-ciava-gold">@ciavastudio</p>
+                <p class="text-sm font-light text-white/50 transition-colors group-hover:text-ciava-gold">{contact.tiktok}</p>
               </div>
               <svg class="h-5 w-5 text-white/10 transition-all duration-300 group-hover:translate-x-1 group-hover:text-ciava-gold/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
@@ -115,9 +119,9 @@
         <p class="text-sm font-light leading-relaxed text-white/50 tracking-wide sm:leading-loose mb-4">
           ¿Tenés un proyecto en mente?
         </p>
-        <a 
-          href="https://wa.me/+5491173738749" 
-          target="_blank" 
+        <a
+          href={whatsappUrl}
+          target="_blank"
           rel="noopener noreferrer"
           class="inline-block border border-ciava-gold/30 px-8 py-3 text-xs font-light tracking-[0.15em] text-ciava-gold/80 transition-all duration-400 hover:border-ciava-gold hover:bg-ciava-gold hover:text-ciava-black"
         >

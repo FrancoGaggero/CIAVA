@@ -1,0 +1,28 @@
+{
+  "services": [
+    {
+      "title": "Producciones de fotos y video para marcas",
+      "description": "Contenido visual profesional para redes sociales, e-commerce y campañas."
+    },
+    {
+      "title": "Asesoría de imagen y estilismo",
+      "description": "Curaduría estética para marcas que buscan definir o reforzar su estética, y para personas que quieren mejorar su imagen."
+    },
+    {
+      "title": "Polas para modelos",
+      "description": "Polaroids profesionales, naturales y actuales para presentación a agencias."
+    },
+    {
+      "title": "Fotografía de producto",
+      "description": "Imágenes limpias y estéticas pensadas para destacar el producto."
+    },
+    {
+      "title": "Fotos para tu marca personal",
+      "description": "Ideal para profesionales que buscan una imagen profesional."
+    },
+    {
+      "title": "Servicios de Marketing",
+      "description": "Community manager, UGC management, branding."
+    }
+  ]
+}

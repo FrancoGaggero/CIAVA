@@ -3,13 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 
-import heroImg1 from "../assets/images/estudio/6550b84a-eaf9-4480-81ac-16bb114c542b.jpg";
-import heroImg2 from "../assets/images/estudio/73e74536-553d-4ab4-b2f6-06c636cd7440.jpg";
-import estudio1 from "../assets/images/estudio/fotoestudio1.jpg";
-import estudio2 from "../assets/images/estudio/fotoestudio2.jpg";
-import estudio3 from "../assets/images/estudio/fotoestudio3.jpg";
+import { resolveImage } from "../lib/images";
+import estudioData from "../data/estudio.json";
 
-const galleryPhotos = [estudio1, estudio2, estudio3, heroImg1, heroImg2];
+const galleryPhotos = [
+  resolveImage(estudioData.foto1),
+  resolveImage(estudioData.foto2),
+  resolveImage(estudioData.foto3),
+  resolveImage(estudioData.foto4),
+  resolveImage(estudioData.foto5),
+];
 ---
 
 <Layout

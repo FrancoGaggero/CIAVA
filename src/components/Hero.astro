@@ -4,8 +4,11 @@
  * Imagen vertical para mobile, horizontal para desktop
  */
 import { Image } from 'astro:assets';
-import heroMobile from '../assets/images/hero/fondo.jpeg';
-import heroDesktop from '../assets/images/hero/fondoDesktop.jpeg';
+import { resolveImage } from '../lib/images';
+import hero from '../data/hero.json';
+
+const heroMobile = resolveImage(hero.imageMobile);
+const heroDesktop = resolveImage(hero.imageDesktop);
 ---
 
 <section id="hero" class="relative min-h-screen w-full overflow-hidden bg-ciava-black">
@@ -55,7 +58,7 @@ import heroDesktop from '../assets/images/hero/fondoDesktop.jpeg';
       id="hero-title"
       class="hero-title mb-4 text-center font-serif text-[clamp(2.25rem,9vw,8rem)] font-light tracking-[0.08em] text-white sm:mb-6 sm:tracking-[0.12em] md:tracking-[0.15em] leading-[0.9]"
     >
-      CIAVA STUDIO
+      {hero.title}
     </h1>
     
     <div class="mb-5 sm:mb-6 line-accent w-16 sm:w-24"></div>
@@ -64,7 +67,7 @@ import heroDesktop from '../assets/images/hero/fondoDesktop.jpeg';
       id="hero-subtitle"
       class="hero-subtitle max-w-xs text-center text-[10px] font-light tracking-[0.2em] text-white/70 sm:max-w-md sm:text-xs sm:tracking-[0.25em] md:max-w-lg md:text-sm"
     >
-      FOTOGRAFÍA Y VIDEO DE MODA PARA MARCAS
+      {hero.subtitle}
     </p>
 
     <!-- Pequeño acento dorado -->

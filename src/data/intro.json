@@ -1,0 +1,11 @@
+{
+  "title": "EL ESTUDIO",
+  "text": [
+    "Somos un estudio creativo especializado en producción de contenido visual para marcas.",
+    "Creamos imágenes y videos que comunican identidad, elevan el producto y potencian la presencia."
+  ],
+  "ctaTitle": "TRABAJA CON NOSOTROS",
+  "ctaSubtitle": "Acá nace tu imagen",
+  "muestra1": "/src/assets/images/studio/muestra1.jpeg",
+  "muestra2": "/src/assets/images/studio/muestra2.jpeg"
+}

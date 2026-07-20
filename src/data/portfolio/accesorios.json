@@ -1,0 +1,18 @@
+{
+  "title": "ACCESORIOS",
+  "order": 5,
+  "images": [
+    { "src": "/src/assets/images/portfolio/accesorios/7L3A2453.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/7L3A2513.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/7L3A2615.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/7L3A2688.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/IMG_6693.PNG", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/IMG_6695.PNG", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/IMG_8015.PNG", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/IMG_8016.PNG", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/IMG_8018.PNG", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/MALUKO-1663.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/MALUKO-1827.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/accesorios/MALUKO-2039.jpeg", "alt": "" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "intro": {
+    "title": "QUIÉNES SOMOS",
+    "text": [
+      "Somos una fotógrafa y una productora de moda.",
+      "Nos fusionamos desde miradas, recorridos y edades distintas, y ahí es donde nace Ciava Studio.",
+      "Esa combinación nos permite abordar cada proyecto con sensibilidad estética, experiencia y una visión actual de la moda. Trabajamos de forma complementaria para crear producciones sólidas, coherentes y alineadas con la identidad de cada marca."
+    ]
+  },
+  "florencia": {
+    "name": "Florencia Zoccola",
+    "role": "Fotógrafa",
+    "instagram": "@florzoccola.fotos",
+    "instagramUrl": "https://www.instagram.com/florzoccola.fotos?igsh=MWc3aXg1dzkyb3FwaA==",
+    "photo": "/src/assets/images/portadaFlor.jpg",
+    "bio": [
+      "Fotógrafa con más de 10 años de experiencia, formada en Motivarte (Buenos Aires) y especializada en fotografía de moda.",
+      "Trabajo de manera integral cada proyecto, desde la dirección en la toma hasta la postproducción final, cuidando la estética, los detalles y los tiempos de entrega. También realizo contenido en video, creando piezas visuales coherentes y pensadas para potenciar la identidad de cada marca en redes y plataformas digitales."
+    ]
+  },
+  "valentina": {
+    "name": "Valentina Bozzone",
+    "role": "Productora de Moda",
+    "instagram": "@portfoliobyvalen",
+    "instagramUrl": "https://www.instagram.com/portfoliobyvalen?igsh=M2MybnpiMXpiaTRh",
+    "photo": "/src/assets/images/portadaValen.jpeg",
+    "bio": [
+      "Productora de moda recibida en la Universidad de Palermo.",
+      "Me encargo de la dirección creativa/styling y de la producción integral de cada proyecto. Trabajo en la conceptualización de la idea, el armado de looks, la curaduría estética y la coordinación general de la producción, asegurando que cada imagen tenga coherencia, identidad y una lectura clara de marca."
+    ]
+  }
+}

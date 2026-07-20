@@ -2,45 +2,45 @@
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 import { Image, getImage } from 'astro:assets';
+import { resolveImage } from '../lib/images';
 
 /**
  * Página de Trabajos / Portfolio
- * Galería organizada por categorías de producción
+ * Galería organizada por categorías de producción.
+ *
+ * Las categorías y sus fotos se definen en `src/data/portfolio/*.json` (un archivo por
+ * categoría), editables desde el panel /admin. Cada categoría tiene: title, order y una
+ * lista ordenada de imágenes { src, alt }.
  */
+type PortfolioImage = { src: string; alt?: string };
+type PortfolioCategory = { title: string; order: number; images: PortfolioImage[] };
 
-// Importar imágenes por categoría
-const calzadoImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/calzado- carteras/*', { eager: true });
-const indumentariaImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/indumentaria/*', { eager: true });
-const bikinisImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/bikinis/*', { eager: true });
-const deportivaImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/ropa deportiva/*', { eager: true });
-const accesoriosImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/accesorios/*', { eager: true });
-const modelTestImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/images/portfolio/model test/*', { eager: true });
+const categoryModules = import.meta.glob<{ default: PortfolioCategory }>(
+  '../data/portfolio/*.json',
+  { eager: true }
+);
 
-function extractImages(modules: Record<string, { default: ImageMetadata }>) {
-  return Object.values(modules).map(m => m.default);
-}
+const categoriesRaw = Object.entries(categoryModules)
+  .map(([path, mod]) => ({
+    id: path.split('/').pop()!.replace(/\.json$/, ''),
+    ...mod.default,
+  }))
+  .sort((a, b) => a.order - b.order);
 
 // Pre-generate optimized thumbnails for the gallery grid
-async function generateOptimizedImages(images: ImageMetadata[]) {
+async function generateOptimizedImages(images: PortfolioImage[]) {
   return Promise.all(images.map(async (img) => {
-    const thumb = await getImage({ src: img, width: 600, quality: 75, format: 'webp' });
-    const full = await getImage({ src: img, width: 1400, quality: 80, format: 'webp' });
-    return { thumb: thumb.src, full: full.src, metadata: img };
+    const metadata = resolveImage(img.src);
+    const thumb = await getImage({ src: metadata, width: 600, quality: 75, format: 'webp' });
+    const full = await getImage({ src: metadata, width: 1400, quality: 80, format: 'webp' });
+    return { thumb: thumb.src, full: full.src, metadata, alt: img.alt ?? '' };
   }));
 }
 
-const categoriesRaw = [
-  { id: 'indumentaria', title: 'INDUMENTARIA', images: extractImages(indumentariaImgs) },
-  { id: 'bikinis', title: 'BIKINIS', images: extractImages(bikinisImgs) },
-  { id: 'calzado-carteras', title: 'CALZADO & CARTERAS', images: extractImages(calzadoImgs) },
-  { id: 'ropa-deportiva', title: 'ROPA DEPORTIVA', images: extractImages(deportivaImgs) },
-  { id: 'accesorios', title: 'ACCESORIOS', images: extractImages(accesoriosImgs) },
-  { id: 'model-test', title: 'MODEL TEST', images: extractImages(modelTestImgs) },
-];
-
 const categories = await Promise.all(
   categoriesRaw.map(async (cat) => ({
-    ...cat,
+    id: cat.id,
+    title: cat.title,
     photos: await generateOptimizedImages(cat.images),
   }))
 );
@@ -147,8 +147,8 @@ const totalPhotos = categories.reduce((acc, cat) => acc + cat.photos.length, 0);
                       : 'relative w-full aspect-[3/4]'
                   }`}>
                     <img 
-                      src={photo.thumb} 
-                      alt={`${cat.title} - Foto ${i + 1}`}
+                      src={photo.thumb}
+                      alt={photo.alt || `${cat.title} - Foto ${i + 1}`}
                       class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.04]"
                       loading={catIndex === 0 && i < 4 ? 'eager' : 'lazy'}
                       decoding="async"

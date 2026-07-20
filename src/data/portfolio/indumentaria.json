@@ -1,0 +1,21 @@
+{
+  "title": "INDUMENTARIA",
+  "order": 1,
+  "images": [
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A2039.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A2319.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A4337.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A5841.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A7406.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A7596.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A7663.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A7782.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A8135.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A8686.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A8878.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A9240.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A9440.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/7L3A9854.jpeg", "alt": "" },
+    { "src": "/src/assets/images/portfolio/indumentaria/PARACAS 002-2224.jpeg", "alt": "" }
+  ]
+}

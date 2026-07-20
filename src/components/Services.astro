@@ -4,38 +4,9 @@
  * Servicios de CIAVA Studio
  */
 
-const services = [
-  {
-    id: 1,
-    title: 'Producciones de fotos y video para marcas',
-    description: 'Contenido visual profesional para redes sociales, e-commerce y campañas.',
-  },
-  {
-    id: 2,
-    title: 'Asesoría de imagen y estilismo',
-    description: 'Curaduría estética para marcas que buscan definir o reforzar su estética, y para personas que quieren mejorar su imagen.',
-  },
-  {
-    id: 3,
-    title: 'Polas para modelos',
-    description: 'Polaroids profesionales, naturales y actuales para presentación a agencias.',
-  },
-  {
-    id: 4,
-    title: 'Fotografía de producto',
-    description: 'Imágenes limpias y estéticas pensadas para destacar el producto.',
-  },
-  {
-    id: 5,
-    title: 'Fotos para tu marca personal',
-    description: 'Ideal para profesionales que buscan una imagen profesional.',
-  },
-  {
-    id: 6,
-    title: 'Servicios de Marketing',
-    description: 'Community manager, UGC management, branding.',
-  }
-];
+import servicesData from '../data/services.json';
+
+const services = servicesData.services;
 ---
 
 <section id="services" class="bg-ciava-dark py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6">
