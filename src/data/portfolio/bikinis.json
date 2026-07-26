@@ -1,5 +1,5 @@
 {
-  "title": "BIKINIS",
+  "title": "BIKINIS/ LENCERIA",
   "order": 2,
   "images": [
     {
@@ -11,23 +11,11 @@
       "alt": ""
     },
     {
+      "src": "/src/assets/images/portfolio/accesorios/4534ce8a-32f4-4b15-827b-77e24e94fce6.jpg",
+      "alt": ""
+    },
+    {
       "src": "/src/assets/images/portfolio/bikinis/IMG_6687.PNG",
-      "alt": ""
-    },
-    {
-      "src": "/src/assets/images/portfolio/bikinis/IMG_6688.PNG",
-      "alt": ""
-    },
-    {
-      "src": "/src/assets/images/portfolio/bikinis/IMG_6691.PNG",
-      "alt": ""
-    },
-    {
-      "src": "/src/assets/images/portfolio/bikinis/IMG_8017.PNG",
-      "alt": ""
-    },
-    {
-      "src": "/src/assets/images/portfolio/bikinis/IMG_8020.PNG",
       "alt": ""
     },
     {
