@@ -3,19 +3,23 @@
   "order": 1,
   "images": [
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A7596.jpeg",
-      "alt": ""
-    },
-    {
       "src": "/src/assets/images/portfolio/indumentaria/7L3A2039.jpeg",
       "alt": ""
     },
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A8463.jpeg",
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A7596.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A1542.jpeg",
       "alt": ""
     },
     {
       "src": "/src/assets/images/portfolio/indumentaria/7L3A5841.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A8463.jpeg",
       "alt": ""
     },
     {
@@ -31,19 +35,11 @@
       "alt": ""
     },
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A8135.jpeg",
-      "alt": ""
-    },
-    {
       "src": "/src/assets/images/portfolio/indumentaria/7L3A8878.jpeg",
       "alt": ""
     },
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A9240.jpeg",
-      "alt": ""
-    },
-    {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A9440.jpeg",
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A8135.jpeg",
       "alt": ""
     }
   ]
