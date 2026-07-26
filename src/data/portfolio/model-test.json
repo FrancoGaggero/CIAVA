@@ -1,7 +1,11 @@
 {
-  "title": "MODEL TEST",
+  "title": "MODEL TEST/ POLAS",
   "order": 6,
   "images": [
+    {
+      "src": "/src/assets/images/portfolio/model-test/7L3A4872.jpg",
+      "alt": ""
+    },
     {
       "src": "/src/assets/images/portfolio/accesorios/7L3A4846.jpg",
       "alt": ""
