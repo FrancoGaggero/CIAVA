@@ -11,6 +11,13 @@ import type { ImageMetadata } from 'astro';
  *
  * Así, cuando ella sube una foto nueva desde el panel /admin, queda referenciada por su
  * ruta y sigue pasando por la optimización de Astro (WebP, thumbnails, etc.).
+ *
+ * IMPORTANTE — resiliencia del build:
+ * Estos resolvers NUNCA rompen el build si falta una imagen. Desde el CMS es fácil dejar
+ * una referencia "colgada" (por ejemplo, elegir de la biblioteca de medios una foto que
+ * quedó en otra carpeta o que no llegó a commitearse). Antes eso tiraba abajo TODO el
+ * deploy de Netlify. Ahora, una imagen faltante se omite y queda un aviso en el log del
+ * build para poder corregirla, pero el sitio se publica igual.
  */
 const modules = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/images/**/*.{jpg,jpeg,png,webp,avif,gif,JPG,JPEG,PNG,WEBP,AVIF,GIF}',
@@ -24,7 +31,7 @@ function normalize(path: string): string {
   return p;
 }
 
-/** Devuelve el ImageMetadata para una ruta guardada, o null si no existe. */
+/** Devuelve el ImageMetadata para una ruta guardada, o null si no existe (silencioso). */
 export function resolveImageSafe(path: string | undefined | null): ImageMetadata | null {
   if (!path) return null;
   const mod = modules[normalize(path)];
@@ -32,16 +39,22 @@ export function resolveImageSafe(path: string | undefined | null): ImageMetadata
 }
 
 /**
- * Devuelve el ImageMetadata para una ruta guardada.
- * Lanza un error claro (que rompe el build) si la imagen no existe, para detectar
- * rutas mal escritas antes de publicar.
+ * Igual que `resolveImageSafe`, pero deja un aviso en el log del build cuando la ruta
+ * apunta a una imagen que no existe. Usalo para imágenes editables desde el CMS: si falta,
+ * devuelve null (quien la use debe omitirla) sin romper el build.
+ *
+ * @param label Etiqueta opcional para identificar en el log de dónde viene la imagen.
  */
-export function resolveImage(path: string): ImageMetadata {
+export function resolveImageWarn(
+  path: string | undefined | null,
+  label?: string
+): ImageMetadata | null {
   const img = resolveImageSafe(path);
-  if (!img) {
-    throw new Error(
-      `[CIAVA] No se encontró la imagen "${path}". ` +
-        `Verificá que el archivo exista dentro de src/assets/images/ y que la ruta empiece por "/src/assets/images/".`
+  if (!img && path) {
+    console.warn(
+      `[CIAVA] ⚠ Imagen no encontrada${label ? ` (${label})` : ''}: "${path}". ` +
+        `Se omite del sitio. Verificá que el archivo exista dentro de src/assets/images/ ` +
+        `y que se haya subido/commiteado junto con el cambio del CMS.`
     );
   }
   return img;

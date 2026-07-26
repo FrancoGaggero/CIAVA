@@ -4,12 +4,12 @@
  * Quiénes somos: Florencia y Valentina
  */
 import { Image } from 'astro:assets';
-import { resolveImage } from '../lib/images';
+import { resolveImageWarn } from '../lib/images';
 import team from '../data/team.json';
 
 const { intro, florencia, valentina } = team;
-const portadaFlor = resolveImage(florencia.photo);
-const portadaValen = resolveImage(valentina.photo);
+const portadaFlor = resolveImageWarn(florencia.photo, 'equipo — Florencia');
+const portadaValen = resolveImageWarn(valentina.photo, 'equipo — Valentina');
 ---
 
 <section id="about" class="bg-ciava-black py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6">
@@ -41,17 +41,19 @@ const portadaValen = resolveImage(valentina.photo);
       <!-- Florencia -->
       <div class="about-card group border border-white/5 bg-ciava-dark/60 p-6 sm:p-8 lg:p-10 transition-all duration-500 hover:border-ciava-gold/20 hover:bg-ciava-charcoal/60 hover:shadow-elevation-3 md:hover:-translate-y-2">
         <!-- Foto -->
-        <div class="mb-6 overflow-hidden">
-          <Image 
-            src={portadaFlor} 
-            alt="Retrato de Florencia Zoccola, fotógrafa de CIAVA Studio" 
-            class="w-full aspect-square object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
-            widths={[400, 600]}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            loading="lazy"
-            decoding="async"
-            quality={80}
-          />
+        <div class="mb-6 overflow-hidden aspect-square bg-ciava-charcoal">
+          {portadaFlor && (
+            <Image
+              src={portadaFlor}
+              alt="Retrato de Florencia Zoccola, fotógrafa de CIAVA Studio"
+              class="w-full aspect-square object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+              decoding="async"
+              quality={80}
+            />
+          )}
         </div>
         
         <div class="space-y-4 sm:space-y-6">
@@ -78,18 +80,20 @@ const portadaValen = resolveImage(valentina.photo);
       <!-- Valentina -->
       <div class="about-card group border border-white/5 bg-ciava-dark/60 p-6 sm:p-8 lg:p-10 transition-all duration-500 hover:border-ciava-gold/20 hover:bg-ciava-charcoal/60 hover:shadow-elevation-3 md:hover:-translate-y-2">
         <!-- Foto -->
-        <div class="mb-6 overflow-hidden">
-          <Image 
-            src={portadaValen} 
-            alt="Retrato de Valentina Bozzone, productora de moda de CIAVA Studio" 
-            class="w-full aspect-square object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
-            style="object-position: center 20%;"
-            widths={[400, 600]}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            loading="lazy"
-            decoding="async"
-            quality={80}
-          />
+        <div class="mb-6 overflow-hidden aspect-square bg-ciava-charcoal">
+          {portadaValen && (
+            <Image
+              src={portadaValen}
+              alt="Retrato de Valentina Bozzone, productora de moda de CIAVA Studio"
+              class="w-full aspect-square object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+              style="object-position: center 20%;"
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+              decoding="async"
+              quality={80}
+            />
+          )}
         </div>
         
         <div class="space-y-4 sm:space-y-6">

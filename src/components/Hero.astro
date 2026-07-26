@@ -4,42 +4,46 @@
  * Imagen vertical para mobile, horizontal para desktop
  */
 import { Image } from 'astro:assets';
-import { resolveImage } from '../lib/images';
+import { resolveImageWarn } from '../lib/images';
 import hero from '../data/hero.json';
 
-const heroMobile = resolveImage(hero.imageMobile);
-const heroDesktop = resolveImage(hero.imageDesktop);
+const heroMobile = resolveImageWarn(hero.imageMobile, 'hero — celular');
+const heroDesktop = resolveImageWarn(hero.imageDesktop, 'hero — escritorio');
 ---
 
 <section id="hero" class="relative min-h-screen w-full overflow-hidden bg-ciava-black">
   <!-- Imagen mobile (vertical) - visible solo en mobile/tablet -->
   <div class="absolute inset-0 md:hidden">
-    <Image 
-      src={heroMobile} 
-      alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires" 
-      class="h-full w-full object-cover opacity-90"
-      style="object-position: center 1%;"
-      widths={[640, 960]}
-      sizes="100vw"
-      loading="eager"
-      decoding="async"
-      quality={80}
-    />
+    {heroMobile && (
+      <Image
+        src={heroMobile}
+        alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires"
+        class="h-full w-full object-cover opacity-90"
+        style="object-position: center 1%;"
+        widths={[640, 960]}
+        sizes="100vw"
+        loading="eager"
+        decoding="async"
+        quality={80}
+      />
+    )}
   </div>
 
   <!-- Imagen desktop (horizontal) - visible solo en desktop -->
   <div class="absolute inset-0 hidden md:block">
-    <Image
-      src={heroDesktop}
-      alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires"
-      class="h-full w-full object-cover opacity-[0.72]"
-      style="object-position: center center;"
-      widths={[1280, 1920]}
-      sizes="100vw"
-      loading="eager"
-      decoding="async"
-      quality={80}
-    />
+    {heroDesktop && (
+      <Image
+        src={heroDesktop}
+        alt="CIAVA Studio — Estudio de fotografía de moda en Buenos Aires"
+        class="h-full w-full object-cover opacity-[0.72]"
+        style="object-position: center center;"
+        widths={[1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+        decoding="async"
+        quality={80}
+      />
+    )}
   </div>
 
   <!-- Overlays (compartidos) -->

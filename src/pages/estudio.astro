@@ -3,15 +3,15 @@ import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 
-import { resolveImage } from "../lib/images";
+import { resolveImageWarn } from "../lib/images";
 import estudioData from "../data/estudio.json";
 
 const galleryPhotos = [
-  resolveImage(estudioData.foto1),
-  resolveImage(estudioData.foto2),
-  resolveImage(estudioData.foto3),
-  resolveImage(estudioData.foto4),
-  resolveImage(estudioData.foto5),
+  resolveImageWarn(estudioData.foto1, "estudio — foto 1"),
+  resolveImageWarn(estudioData.foto2, "estudio — foto 2"),
+  resolveImageWarn(estudioData.foto3, "estudio — foto 3"),
+  resolveImageWarn(estudioData.foto4, "estudio — foto 4"),
+  resolveImageWarn(estudioData.foto5, "estudio — foto 5"),
 ];
 ---
 
@@ -87,16 +87,18 @@ const galleryPhotos = [
           class="studio-gallery-item group relative overflow-hidden lg:col-span-2 lg:row-span-2"
         >
           <div
-            class="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full min-h-[300px] lg:min-h-[500px]"
+            class="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full min-h-[300px] lg:min-h-[500px] bg-ciava-charcoal"
           >
-            <Image
-              src={galleryPhotos[0]}
-              alt="Estudio CIAVA - Vista principal"
-              class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
-              widths={[600, 900, 1200]}
-              sizes="(max-width: 768px) 100vw, 66vw"
-              loading="eager"
-            />
+            {galleryPhotos[0] && (
+              <Image
+                src={galleryPhotos[0]}
+                alt="Estudio CIAVA - Vista principal"
+                class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                widths={[600, 900, 1200]}
+                sizes="(max-width: 768px) 100vw, 66vw"
+                loading="eager"
+              />
+            )}
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
@@ -105,15 +107,17 @@ const galleryPhotos = [
         </div>
         <!-- Imagen 2 -->
         <div class="studio-gallery-item group relative overflow-hidden">
-          <div class="relative w-full aspect-[4/3]">
-            <Image
-              src={galleryPhotos[1]}
-              alt="Estudio CIAVA - Detalle"
-              class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
-              widths={[400, 600]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-              loading="eager"
-            />
+          <div class="relative w-full aspect-[4/3] bg-ciava-charcoal">
+            {galleryPhotos[1] && (
+              <Image
+                src={galleryPhotos[1]}
+                alt="Estudio CIAVA - Detalle"
+                class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                widths={[400, 600]}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                loading="eager"
+              />
+            )}
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
@@ -122,15 +126,17 @@ const galleryPhotos = [
         </div>
         <!-- Imagen 3 -->
         <div class="studio-gallery-item group relative overflow-hidden">
-          <div class="relative w-full aspect-[4/3]">
-            <Image
-              src={galleryPhotos[2]}
-              alt="Estudio CIAVA - Ambiente"
-              class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
-              widths={[400, 600]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-              loading="eager"
-            />
+          <div class="relative w-full aspect-[4/3] bg-ciava-charcoal">
+            {galleryPhotos[2] && (
+              <Image
+                src={galleryPhotos[2]}
+                alt="Estudio CIAVA - Ambiente"
+                class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                widths={[400, 600]}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                loading="eager"
+              />
+            )}
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
@@ -139,15 +145,17 @@ const galleryPhotos = [
         </div>
         <!-- Imagen 4 -->
         <div class="studio-gallery-item group relative overflow-hidden">
-          <div class="relative w-full aspect-[4/3]">
-            <Image
-              src={galleryPhotos[3]}
-              alt="Estudio CIAVA - Equipamiento"
-              class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
-              widths={[400, 600]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-              loading="lazy"
-            />
+          <div class="relative w-full aspect-[4/3] bg-ciava-charcoal">
+            {galleryPhotos[3] && (
+              <Image
+                src={galleryPhotos[3]}
+                alt="Estudio CIAVA - Equipamiento"
+                class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                widths={[400, 600]}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                loading="lazy"
+              />
+            )}
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
@@ -158,15 +166,17 @@ const galleryPhotos = [
         <div
           class="studio-gallery-item group relative overflow-hidden lg:col-span-2"
         >
-          <div class="relative w-full aspect-[4/3] lg:aspect-[16/9]">
-            <Image
-              src={galleryPhotos[4]}
-              alt="Estudio CIAVA - Espacio completo"
-              class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
-              widths={[600, 900, 1200]}
-              sizes="(max-width: 768px) 100vw, 66vw"
-              loading="lazy"
-            />
+          <div class="relative w-full aspect-[4/3] lg:aspect-[16/9] bg-ciava-charcoal">
+            {galleryPhotos[4] && (
+              <Image
+                src={galleryPhotos[4]}
+                alt="Estudio CIAVA - Espacio completo"
+                class="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                widths={[600, 900, 1200]}
+                sizes="(max-width: 768px) 100vw, 66vw"
+                loading="lazy"
+              />
+            )}
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >

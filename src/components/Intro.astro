@@ -4,11 +4,11 @@
  * Descripción del estudio
  */
 import { Image } from 'astro:assets';
-import { resolveImage } from '../lib/images';
+import { resolveImageWarn } from '../lib/images';
 import intro from '../data/intro.json';
 
-const muestra1 = resolveImage(intro.muestra1);
-const muestra3 = resolveImage(intro.muestra2);
+const muestra1 = resolveImageWarn(intro.muestra1, 'estudio — muestra 1');
+const muestra3 = resolveImageWarn(intro.muestra2, 'estudio — muestra 2');
 ---
 
 <section id="intro" class="bg-ciava-dark py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6">
@@ -41,31 +41,35 @@ const muestra3 = resolveImage(intro.muestra2);
         <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8">
           <!-- Imagen 1 -->
           <div class="production-item group relative aspect-[4/5] overflow-hidden bg-ciava-charcoal opacity-0" style="transform: scale(0.8);">
-            <Image 
-              src={muestra1} 
-              alt="Sesión de fotografía de moda en estudio CIAVA" 
-              class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
-              widths={[400, 600, 800]}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              loading="lazy"
-              decoding="async"
-              quality={80}
-            />
+            {muestra1 && (
+              <Image
+                src={muestra1}
+                alt="Sesión de fotografía de moda en estudio CIAVA"
+                class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+                widths={[400, 600, 800]}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
+                decoding="async"
+                quality={80}
+              />
+            )}
             <div class="absolute inset-0 bg-gradient-to-t from-ciava-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
           </div>
 
           <!-- Imagen 3 -->
           <div class="production-item group relative aspect-[4/5] overflow-hidden bg-ciava-charcoal opacity-0" style="transform: scale(0.8);">
-            <Image 
-              src={muestra3} 
-              alt="Producción fotográfica de indumentaria para marca" 
-              class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
-              widths={[400, 600, 800]}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              loading="lazy"
-              decoding="async"
-              quality={80}
-            />
+            {muestra3 && (
+              <Image
+                src={muestra3}
+                alt="Producción fotográfica de indumentaria para marca"
+                class="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+                widths={[400, 600, 800]}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
+                decoding="async"
+                quality={80}
+              />
+            )}
             <div class="absolute inset-0 bg-gradient-to-t from-ciava-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
           </div>
         </div>
