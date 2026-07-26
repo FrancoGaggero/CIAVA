@@ -2,12 +2,37 @@
   "title": "BIKINIS",
   "order": 2,
   "images": [
-    { "src": "/src/assets/images/portfolio/bikinis/7L3A2309.jpeg", "alt": "" },
-    { "src": "/src/assets/images/portfolio/bikinis/IMG_6686.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/bikinis/IMG_6687.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/bikinis/IMG_6688.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/bikinis/IMG_6691.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/bikinis/IMG_8017.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/bikinis/IMG_8020.PNG", "alt": "" }
+    {
+      "src": "/src/assets/images/portfolio/bikinis/7L3A2309.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/bikinis/IMG_6686.PNG",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/bikinis/IMG_6687.PNG",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/bikinis/IMG_6688.PNG",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/bikinis/IMG_6691.PNG",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/bikinis/IMG_8017.PNG",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/bikinis/IMG_8020.PNG",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/accesorios/ananasTest.jpeg",
+      "alt": ""
+    }
   ]
 }

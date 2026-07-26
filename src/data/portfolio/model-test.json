@@ -2,9 +2,9 @@
   "title": "MODEL TEST",
   "order": 6,
   "images": [
-    { "src": "/src/assets/images/portfolio/model test/5a161b3a-e67f-497d-af36-fd4e0c78f534.jpg", "alt": "" },
-    { "src": "/src/assets/images/portfolio/model test/7L3A7769.jpeg", "alt": "" },
-    { "src": "/src/assets/images/portfolio/model test/7L3A7893.jpeg", "alt": "" },
-    { "src": "/src/assets/images/portfolio/model test/7L3A9312.jpeg", "alt": "" }
+    {
+      "src": "/src/assets/images/portfolio/accesorios/7L3A4846.jpg",
+      "alt": ""
+    }
   ]
 }
