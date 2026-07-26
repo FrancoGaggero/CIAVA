@@ -3,10 +3,6 @@
   "order": 2,
   "images": [
     {
-      "src": "/src/assets/images/portfolio/bikinis/7L3A2309.jpeg",
-      "alt": ""
-    },
-    {
       "src": "/src/assets/images/portfolio/bikinis/IMG_6686.PNG",
       "alt": ""
     },
@@ -20,6 +16,10 @@
     },
     {
       "src": "/src/assets/images/portfolio/accesorios/ananasTest.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/accesorios/7L3A3014.jpg",
       "alt": ""
     }
   ]
