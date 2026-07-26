@@ -21,10 +21,14 @@ const categoryModules = import.meta.glob<{ default: PortfolioCategory }>(
   { eager: true }
 );
 
+// Se normaliza cada categoría con valores por defecto para que una categoría recién
+// creada desde el CMS (todavía sin fotos, orden o título) no rompa el build.
 const categoriesRaw = Object.entries(categoryModules)
   .map(([path, mod]) => ({
     id: path.split('/').pop()!.replace(/\.json$/, ''),
-    ...mod.default,
+    title: mod.default.title ?? 'Sin título',
+    order: mod.default.order ?? 99,
+    images: mod.default.images ?? [],
   }))
   .sort((a, b) => a.order - b.order);
 

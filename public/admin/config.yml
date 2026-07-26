@@ -134,102 +134,38 @@ collections:
               - { name: tiktokUrl, label: "Link de TikTok", widget: string }
 
   # ===========================================================================
-  # PORTFOLIO — un archivo por categoría, con fotos reordenables
+  # PORTFOLIO — una entrada por categoría (se pueden crear categorías NUEVAS)
   # ===========================================================================
+  # Colección tipo "carpeta": cada archivo .json dentro de src/data/portfolio/ es
+  # una categoría. Con el botón "Agregar Categoría" se crean nuevas; la página de
+  # Trabajos las detecta automáticamente y las ordena por el campo "Orden".
+  # Las fotos de cada categoría se guardan en /src/assets/images/portfolio/<slug>/
+  # (el <slug> se arma solo a partir del nombre de la categoría).
   - name: portfolio
     label: "Portfolio"
     label_singular: "Categoría"
-    description: "Agregá, borrá o reordená las fotos de cada categoría (arrastrá para reordenar)."
-    files:
-      - name: indumentaria
-        label: "Indumentaria"
-        file: "src/data/portfolio/indumentaria.json"
+    description: "Cada entrada es una categoría del portfolio. Podés crear categorías nuevas, editarlas, reordenar sus fotos o borrarlas."
+    folder: "src/data/portfolio"
+    extension: json
+    format: json
+    create: true
+    identifier_field: title
+    slug: "{{slug}}"
+    summary: "{{title}} — orden {{order}}"
+    sortable_fields: [order, title]
+    media_folder: "/src/assets/images/portfolio/{{slug}}"
+    public_folder: "/src/assets/images/portfolio/{{slug}}"
+    fields:
+      - { name: title, label: "Nombre de la categoría", widget: string, hint: "Se muestra como título y en el botón de filtro (por ej.: ROPA DE INVIERNO)." }
+      - { name: order, label: "Orden", widget: number, value_type: int, default: 99, hint: "Menor número = aparece primero. Las categorías actuales usan 1 a 6." }
+      - name: images
+        label: "Fotos"
+        label_singular: "Foto"
+        widget: list
+        summary: "{{fields.alt}}"
         fields:
-          - { name: title, label: "Nombre de la categoría", widget: string }
-          - { name: order, label: "Orden", widget: number, value_type: int, default: 1 }
-          - name: images
-            label: "Fotos"
-            label_singular: "Foto"
-            widget: list
-            summary: "{{fields.alt}}"
-            fields:
-              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/indumentaria", public_folder: "/src/assets/images/portfolio/indumentaria" }
-              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
-
-      - name: bikinis
-        label: "Bikinis"
-        file: "src/data/portfolio/bikinis.json"
-        fields:
-          - { name: title, label: "Nombre de la categoría", widget: string }
-          - { name: order, label: "Orden", widget: number, value_type: int, default: 2 }
-          - name: images
-            label: "Fotos"
-            label_singular: "Foto"
-            widget: list
-            summary: "{{fields.alt}}"
-            fields:
-              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/bikinis", public_folder: "/src/assets/images/portfolio/bikinis" }
-              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
-
-      - name: calzado-carteras
-        label: "Calzado & Carteras"
-        file: "src/data/portfolio/calzado-carteras.json"
-        fields:
-          - { name: title, label: "Nombre de la categoría", widget: string }
-          - { name: order, label: "Orden", widget: number, value_type: int, default: 3 }
-          - name: images
-            label: "Fotos"
-            label_singular: "Foto"
-            widget: list
-            summary: "{{fields.alt}}"
-            fields:
-              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/calzado- carteras", public_folder: "/src/assets/images/portfolio/calzado- carteras" }
-              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
-
-      - name: ropa-deportiva
-        label: "Ropa Deportiva"
-        file: "src/data/portfolio/ropa-deportiva.json"
-        fields:
-          - { name: title, label: "Nombre de la categoría", widget: string }
-          - { name: order, label: "Orden", widget: number, value_type: int, default: 4 }
-          - name: images
-            label: "Fotos"
-            label_singular: "Foto"
-            widget: list
-            summary: "{{fields.alt}}"
-            fields:
-              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/ropa deportiva", public_folder: "/src/assets/images/portfolio/ropa deportiva" }
-              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
-
-      - name: accesorios
-        label: "Accesorios"
-        file: "src/data/portfolio/accesorios.json"
-        fields:
-          - { name: title, label: "Nombre de la categoría", widget: string }
-          - { name: order, label: "Orden", widget: number, value_type: int, default: 5 }
-          - name: images
-            label: "Fotos"
-            label_singular: "Foto"
-            widget: list
-            summary: "{{fields.alt}}"
-            fields:
-              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/accesorios", public_folder: "/src/assets/images/portfolio/accesorios" }
-              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
-
-      - name: model-test
-        label: "Model Test"
-        file: "src/data/portfolio/model-test.json"
-        fields:
-          - { name: title, label: "Nombre de la categoría", widget: string }
-          - { name: order, label: "Orden", widget: number, value_type: int, default: 6 }
-          - name: images
-            label: "Fotos"
-            label_singular: "Foto"
-            widget: list
-            summary: "{{fields.alt}}"
-            fields:
-              - { name: src, label: "Imagen", widget: image, media_folder: "/src/assets/images/portfolio/model test", public_folder: "/src/assets/images/portfolio/model test" }
-              - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
+          - { name: src, label: "Imagen", widget: image }
+          - { name: alt, label: "Descripción (opcional, SEO/accesibilidad)", widget: string, required: false }
 
   # ===========================================================================
   # PÁGINA DEL ESTUDIO (Nordelta) — 5 fotos fijas (se pueden reemplazar)
