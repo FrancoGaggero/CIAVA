@@ -3,10 +3,6 @@
   "order": 1,
   "images": [
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A2039.jpeg",
-      "alt": ""
-    },
-    {
       "src": "/src/assets/images/portfolio/indumentaria/7L3A7596.jpeg",
       "alt": ""
     },
@@ -15,15 +11,19 @@
       "alt": ""
     },
     {
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A2039.jpeg",
+      "alt": ""
+    },
+    {
       "src": "/src/assets/images/portfolio/indumentaria/7L3A5841.jpeg",
       "alt": ""
     },
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A8463.jpeg",
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A1531.jpg",
       "alt": ""
     },
     {
-      "src": "/src/assets/images/portfolio/indumentaria/7L3A2319.jpeg",
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A3172.jpg",
       "alt": ""
     },
     {
@@ -32,6 +32,10 @@
     },
     {
       "src": "/src/assets/images/portfolio/indumentaria/7L3A7782.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/indumentaria/7L3A3131.jpg",
       "alt": ""
     },
     {
