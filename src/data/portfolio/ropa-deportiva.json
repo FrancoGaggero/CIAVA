@@ -2,11 +2,17 @@
   "title": "ROPA DEPORTIVA",
   "order": 4,
   "images": [
-    { "src": "/src/assets/images/portfolio/ropa deportiva/7L3A1483.jpeg", "alt": "" },
-    { "src": "/src/assets/images/portfolio/ropa deportiva/7L3A1503.jpeg", "alt": "" },
-    { "src": "/src/assets/images/portfolio/ropa deportiva/IMG_6689.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/ropa deportiva/IMG_6690.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/ropa deportiva/IMG_8012.PNG", "alt": "" },
-    { "src": "/src/assets/images/portfolio/ropa deportiva/e8fb5990-13f7-4182-9bf7-3ffc0f498ced.jpg", "alt": "" }
+    {
+      "src": "/src/assets/images/portfolio/ropa deportiva/7L3A1483.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/ropa deportiva/7L3A1503.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "/src/assets/images/portfolio/ropa deportiva/IMG_6689.PNG",
+      "alt": ""
+    }
   ]
 }
